@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>দশম শ্রেণি · ইতিহাস · তৃতীয় অধ্যায় কুইজ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(145deg, #1a1e2c 0%, #2a2f42 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            margin: 0;
+        }
+        .stage { width: 100%; max-width: 780px; margin: 0 auto; }
+        .brandbar {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            color: rgba(255, 215, 150, 0.7); font-size: 12px; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 18px;
+        }
+        .brandbar .dash { width: 28px; height: 1px; background: linear-gradient(90deg, transparent, #c9a87c); }
+        .brandbar .dash.right { background: linear-gradient(90deg, #c9a87c, transparent); }
+        .card {
+            background: #f7f3ec; border-radius: 28px;
+            box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,124,0.3);
+            position: relative; overflow: hidden; animation: rise 0.5s cubic-bezier(0.2,0.9,0.3,1.1);
+        }
+        .card::before { content: ''; position: absolute; top:0; left:0; right:0; height:5px; background: linear-gradient(90deg, #8a2e3f, #c9a87c, #2d4a5e); }
+        @keyframes rise { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+        
+        /* === LOGIN SCREEN === */
+        .login { padding: 50px 36px 40px; text-align: center; }
+        .login .emblem {
+            width: 72px; height: 72px; background: radial-gradient(circle at 30% 30%, #c9a87c, #a5835a);
+            border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 20px -6px rgba(165,131,90,0.6);
+        }
+        .login .emblem svg { width: 36px; height: 36px; fill: #2d1f14; }
+        .login h1 { font-family: 'Baloo Da 2', sans-serif; font-size: 26px; color: #1d2c3a; margin: 0 0 4px; }
+        .login .sub { font-weight: 600; color: #8a2e3f; font-size: 14px; margin: 0 0 22px; letter-spacing: 0.02em; }
+        .login .field { text-align: left; margin-bottom: 14px; }
+        .login .field label { display: block; font-weight: 600; font-size: 13px; color: #1d2c3a; margin-bottom: 5px; }
+        .login .field input {
+            width: 100%; padding: 12px 16px; border-radius: 12px; border: 1.5px solid rgba(29,44,58,0.15);
+            font-family: 'Hind Siliguri', sans-serif; font-size: 15px; background: #fff;
+            transition: 0.2s; outline: none;
+        }
+        .login .field input:focus { border-color: #8a2e3f; box-shadow: 0 0 0 4px rgba(138,46,63,0.08); }
+        .login .btn-primary {
+            width: 100%; padding: 14px; border: none; border-radius: 14px;
+            background: linear-gradient(180deg, #c9a87c, #a5835a); color: #1d2c3a;
+            font-family: 'Hind Siliguri', sans-serif; font-weight: 700; font-size: 16px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            cursor: pointer; box-shadow: 0 10px 24px -10px rgba(165,131,90,0.6);
+            transition: transform 0.15s, box-shadow 0.15s;
+            margin-top: 4px;
+        }
+        .login .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.04); }
+        .login .btn-primary:active { transform: translateY(0); }
+        .login .error-box {
+            background: rgba(179,65,74,0.08); border: 1px solid #b3414a; border-radius: 10px;
+            padding: 10px 14px; color: #b3414a; font-weight: 600; font-size: 13px;
+            margin-top: 12px; display: none;
+        }
+        .login .error-box.show { display: block; animation: fadein 0.3s; }
+        .login .info-text { font-size: 12px; color: #6b7a88; margin-top: 12px; border-top: 1px solid rgba(29,44,58,0.08); padding-top: 14px; }
+        .login .info-text span { display: inline-block; background: rgba(29,44,58,0.06); padding: 2px 10px; border-radius: 6px; font-weight: 600; color: #1d2c3a; margin: 0 3px; }
+
+        /* === START SCREEN === */
+        .start { padding: 42px 32px 32px; text-align: center; }
+        .start .emblem {
+            width: 68px; height: 68px; background: radial-gradient(circle at 30% 30%, #c9a87c, #a5835a);
+            border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 20px -6px rgba(165,131,90,0.6);
+        }
+        .start .emblem svg { width: 34px; height: 34px; fill: #2d1f14; }
+        .start h1 { font-family: 'Baloo Da 2', sans-serif; font-size: 28px; color: #1d2c3a; margin: 0 0 4px; line-height: 1.2; }
+        .start .sub { font-weight: 600; color: #8a2e3f; font-size: 15px; margin: 0 0 16px; letter-spacing: 0.02em; }
+        .start .meta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 22px; }
+        .start .pill {
+            background: rgba(29,44,58,0.06); border: 1px solid rgba(29,44,58,0.12);
+            padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 600; color: #1d2c3a;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .start .pill svg { width: 14px; height: 14px; }
+        .start .logged-user { font-size: 13px; color: #2a7a4b; font-weight: 600; margin-bottom: 14px; background: rgba(42,122,75,0.06); padding: 8px; border-radius: 10px; border: 1px solid rgba(42,122,75,0.15); }
+        .start .logged-user .logout-btn { color: #b3414a; cursor: pointer; text-decoration: underline; margin-left: 8px; }
+        .start .field { text-align: left; margin-bottom: 18px; }
+        .start .field label { display: block; font-weight: 600; font-size: 13px; color: #1d2c3a; margin-bottom: 6px; }
+        .start .field input {
+            width: 100%; padding: 12px 16px; border-radius: 12px; border: 1.5px solid rgba(29,44,58,0.15);
+            font-family: 'Hind Siliguri', sans-serif; font-size: 15px; background: #fff;
+            transition: 0.2s; outline: none;
+        }
+        .start .field input:focus { border-color: #8a2e3f; box-shadow: 0 0 0 4px rgba(138,46,63,0.08); }
+        .start .field .hint { font-size: 12px; color: #b3414a; font-weight: 600; margin-top: 6px; min-height: 18px; }
+        .start .set-select { text-align: left; margin-bottom: 22px; }
+        .start .set-select label { font-weight: 600; font-size: 13px; color: #1d2c3a; display: block; margin-bottom: 8px; }
+        .start .set-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .start .set-chip {
+            background: #fff; border: 1.5px solid rgba(29,44,58,0.12); border-radius: 12px;
+            padding: 8px 4px; text-align: center; font-weight: 600; font-size: 12px; color: #1d2c3a;
+            cursor: pointer; transition: 0.15s; line-height: 1.3;
+        }
+        .start .set-chip .n { display: block; font-size: 16px; font-weight: 800; margin-bottom: 2px; }
+        .start .set-chip:hover { border-color: #c9a87c; }
+        .start .set-chip.active { background: linear-gradient(180deg, #8a2e3f, #6a1e2a); border-color: #6a1e2a; color: #fff; box-shadow: 0 6px 14px -6px rgba(138,46,63,0.5); }
+        .start .btn-primary {
+            width: 100%; padding: 14px; border: none; border-radius: 14px;
+            background: linear-gradient(180deg, #c9a87c, #a5835a); color: #1d2c3a;
+            font-family: 'Hind Siliguri', sans-serif; font-weight: 700; font-size: 16px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            cursor: pointer; box-shadow: 0 10px 24px -10px rgba(165,131,90,0.6);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .start .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.04); }
+        .start .btn-primary:active { transform: translateY(0); }
+        .start .btn-primary:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+        .start .btn-primary svg { width:18px; height:18px; }
+
+        /* === QUIZ SCREEN === */
+        .quiz-top { display:flex; align-items:center; justify-content:space-between; padding:18px 24px 14px; border-bottom:1px solid rgba(29,44,58,0.08); gap:12px; }
+        .who { display:flex; align-items:center; gap:10px; min-width:0; }
+        .avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#8a2e3f,#2d4a5e); color:#fff; font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; flex:none; }
+        .who .name { font-weight:700; font-size:14px; color:#1d2c3a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:130px; }
+        .who .setname { font-size:11px; color:#8a2e3f; font-weight:600; }
+        .timer { display:flex; align-items:center; gap:6px; background:rgba(29,44,58,0.06); padding:8px 14px; border-radius:99px; font-weight:700; font-size:14px; color:#1d2c3a; font-variant-numeric:tabular-nums; transition:0.2s; }
+        .timer.warn { background:rgba(179,65,74,0.12); color:#b3414a; }
+        .timer.pulse { animation:pulse 1s infinite; }
+        @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+        .timer svg { width:16px; height:16px; }
+        .progress-wrap { padding:12px 24px 0; }
+        .progress-text { display:flex; justify-content:space-between; font-size:12px; font-weight:600; color:#2d4a5e; margin-bottom:6px; }
+        .progress-bar { height:6px; border-radius:99px; background:rgba(29,44,58,0.08); overflow:hidden; }
+        .progress-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,#8a2e3f,#c9a87c); transition:width 0.35s ease; }
+        .qdots { display:flex; flex-wrap:wrap; gap:6px; padding:12px 24px 6px; }
+        .dot { width:10px; height:10px; border-radius:50%; background:rgba(29,44,58,0.15); transition:background 0.2s, transform 0.2s; }
+        .dot.current { background:#c9a87c; transform:scale(1.25); }
+        .dot.answered-correct { background:#2a7a4b; }
+        .dot.answered-wrong { background:#b3414a; }
+        .qbody { padding:16px 24px 20px; }
+        .qnum-tag { display:inline-block; background:rgba(138,46,63,0.08); color:#8a2e3f; font-weight:700; font-size:11px; padding:3px 12px; border-radius:99px; margin-bottom:12px; letter-spacing:0.04em; }
+        .qtext { font-size:17px; font-weight:600; color:#1d2c3a; line-height:1.6; margin:0 0 18px; }
+        .options { display:flex; flex-direction:column; gap:10px; }
+        .opt { display:flex; align-items:flex-start; gap:12px; padding:12px 16px; border:1.5px solid rgba(29,44,58,0.1); border-radius:14px; background:#fff; cursor:pointer; transition:0.15s; font-size:14.5px; line-height:1.5; color:#1d2c3a; }
+        .opt:hover { border-color:#c9a87c; background:#fffcf7; }
+        .opt .letter { flex:none; width:26px; height:26px; border-radius:50%; border:1.5px solid rgba(29,44,58,0.15); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; background:#f5efe8; color:#1d2c3a; transition:0.15s; }
+        .opt.selected { border-color:#2d4a5e; background:rgba(45,74,94,0.06); }
+        .opt.selected .letter { background:#2d4a5e; border-color:#2d4a5e; color:#fff; }
+        .opt.correct { border-color:#2a7a4b; background:rgba(42,122,75,0.08); }
+        .opt.correct .letter { background:#2a7a4b; border-color:#2a7a4b; color:#fff; }
+        .opt.wrong { border-color:#b3414a; background:rgba(179,65,74,0.08); }
+        .opt.wrong .letter { background:#b3414a; border-color:#b3414a; color:#fff; }
+        .opt.disabled { cursor:default; }
+        .explain { margin-top:16px; padding:12px 16px; border-radius:12px; background:rgba(201,168,124,0.12); border:1px solid rgba(201,168,124,0.3); font-size:13px; line-height:1.6; color:#4d3a28; display:none; }
+        .explain.show { display:block; animation:fadein 0.3s; }
+        @keyframes fadein { from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);} }
+        .explain b { color:#6a1e2a; }
+        .qfoot { display:flex; justify-content:space-between; align-items:center; padding:12px 24px 20px; gap:12px; }
+        .btn-ghost { padding:10px 18px; border-radius:11px; border:1.5px solid rgba(29,44,58,0.12); background:#fff; font-family:'Hind Siliguri',sans-serif; font-weight:600; font-size:13px; color:#1d2c3a; cursor:pointer; transition:0.15s; }
+        .btn-ghost:hover { border-color:#2d4a5e; }
+        .btn-ghost:disabled { opacity:0.4; cursor:not-allowed; }
+        .btn-next { padding:10px 22px; border:none; border-radius:11px; background:linear-gradient(180deg,#2d4a5e,#1d3344); color:#fff; font-family:'Hind Siliguri',sans-serif; font-weight:700; font-size:14px; display:flex; align-items:center; gap:6px; cursor:pointer; box-shadow:0 8px 18px -8px rgba(29,44,58,0.5); transition:0.15s; }
+        .btn-next:hover { filter:brightness(1.08); transform:translateY(-1px); }
+        .btn-next:disabled { opacity:0.5; cursor:not-allowed; transform:none; filter:none; }
+        .btn-next svg { width:16px; height:16px; }
+
+        /* === RESULT SCREEN === */
+        .result { padding:38px 32px 32px; text-align:center; }
+        .ring-wrap { position:relative; width:170px; height:170px; margin:0 auto 18px; }
+        .ring-wrap svg { transform:rotate(-90deg); }
+        .ring-bg { fill:none; stroke:rgba(29,44,58,0.08); stroke-width:14; }
+        .ring-fg { fill:none; stroke-width:14; stroke-linecap:round; transition:stroke-dashoffset 1.2s cubic-bezier(0.2,0.9,0.3,1.1); }
+        .ring-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        .ring-center .pct { font-family:'Baloo Da 2',sans-serif; font-size:36px; font-weight:800; color:#1d2c3a; line-height:1; }
+        .ring-center .lbl { font-size:11px; font-weight:700; color:#8a2e3f; text-transform:uppercase; letter-spacing:0.06em; margin-top:2px; }
+        .result h2 { font-family:'Baloo Da 2',sans-serif; font-size:22px; color:#1d2c3a; margin:0 0 4px; }
+        .result .greet { font-weight:600; font-size:14px; color:#8a2e3f; margin:0 0 20px; }
+        .stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:24px; }
+        .stat-box { background:#fff; border:1px solid rgba(29,44,58,0.08); border-radius:14px; padding:14px 8px; }
+        .stat-box .v { font-family:'Baloo Da 2',sans-serif; font-size:22px; font-weight:800; color:#1d2c3a; }
+        .stat-box.correct .v { color:#2a7a4b; }
+        .stat-box.wrong .v { color:#b3414a; }
+        .stat-box .l { font-size:11px; font-weight:600; color:#6b7a88; margin-top:2px; }
+        .result-actions { display:flex; gap:10px; }
+        .result-actions .btn-ghost, .result-actions .btn-primary { flex:1; margin:0; }
+        .review-toggle { margin-top:18px; font-size:13px; color:#2d4a5e; font-weight:600; cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+        .review-list { text-align:left; margin-top:16px; display:none; max-height:360px; overflow-y:auto; padding-right:4px; }
+        .review-list.show { display:block; }
+        .rev-item { border:1px solid rgba(29,44,58,0.08); border-radius:12px; padding:12px 14px; margin-bottom:8px; background:#fff; }
+        .rev-item .rq { font-size:13px; font-weight:600; color:#1d2c3a; margin-bottom:4px; line-height:1.5; }
+        .rev-item .ra { font-size:12.5px; line-height:1.5; }
+        .rev-item .ra.ok { color:#2a7a4b; font-weight:600; }
+        .rev-item .ra.bad { color:#b3414a; font-weight:600; }
+        .rev-item .ra .correctline { color:#2a7a4b; font-weight:600; display:block; margin-top:2px; }
+        .footer-mark { text-align:center; margin-top:18px; font-size:11px; color:rgba(255,255,255,0.4); letter-spacing:0.04em; }
+        @media (max-width:600px) {
+            .login { padding: 30px 18px 24px; }
+            .start { padding:30px 18px 24px; }
+            .start .set-grid { grid-template-columns:repeat(2,1fr); }
+            .qbody { padding:14px 16px 16px; }
+            .quiz-top { padding:14px 16px 10px; }
+            .progress-wrap { padding:10px 16px 0; }
+            .qdots { padding:8px 16px 4px; }
+            .qfoot { padding:10px 16px 16px; }
+            .result { padding:28px 16px 24px; }
+            .stat-row { gap:6px; }
+        }
+    </style>
+</head>
+<body>
+<div class="stage">
+    <div class="brandbar"><span class="dash"></span><span>দশম শ্রেণি · ইতিহাস</span><span class="dash right"></span></div>
+
+    <!-- ========== LOGIN ========== -->
+    <div class="card" id="screen-login">
+        <div class="login">
+            <div class="emblem"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M6 11v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5" stroke="#2d1f14" stroke-width="1.4" fill="none"/><path d="M22 8v6" stroke="#2d1f14" stroke-width="1.4"/></svg></div>
+            <h1>🔐 লগইন</h1>
+            <p class="sub">তৃতীয় অধ্যায় · প্রতিরোধ ও বিদ্রোহ: বৈশিষ্ট্য ও বিশ্লেষণ</p>
+            <div class="field"><label for="login-username">ইউজারনেম</label><input id="login-username" type="text" placeholder="ইউজারনেম দিন" autocomplete="off" /></div>
+            <div class="field"><label for="login-password">পাসওয়ার্ড</label><input id="login-password" type="password" placeholder="পাসওয়ার্ড দিন" autocomplete="off" /></div>
+            <button class="btn-primary" id="login-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg> লগইন</button>
+            <div class="error-box" id="login-error">❌ ভুল ইউজারনেম বা পাসওয়ার্ড। আবার চেষ্টা করুন।</div>
+            <div class="info-text">📌 ইউজারনেম: <span>Ajay21</span> বা <span>Sagun12</span> &nbsp;|&nbsp; 🔑 পাসওয়ার্ড: <span>Ajay7890</span> বা <span>Sagun1223</span></div>
+        </div>
+    </div>
+
+    <!-- ========== START ========== -->
+    <div class="card" id="screen-start" style="display:none;">
+        <div class="start">
+            <div class="emblem"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M6 11v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5" stroke="#2d1f14" stroke-width="1.4" fill="none"/><path d="M22 8v6" stroke="#2d1f14" stroke-width="1.4"/></svg></div>
+            <h1>প্রতিরোধ ও বিদ্রোহ: বৈশিষ্ট্য ও বিশ্লেষণ</h1>
+            <p class="sub">তৃতীয় অধ্যায় · অরণ্য আইন, আদিবাসী প্রতিক্রিয়া, ধর্মীয় ও কৃষক বিদ্রোহ</p>
+            <div class="logged-user" id="logged-user">👤 লগইন করেছেন: <span id="logged-username">—</span> <span class="logout-btn" id="logout-btn">(লগআউট)</span></div>
+            <div class="meta-row">
+                <span class="pill"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6"/></svg> প্রতি প্রশ্নে ৩০ সেক</span>
+                <span class="pill"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg> ৮টি সেট · ১২০টি প্রশ্ন</span>
+            </div>
+            <div class="field">
+                <label for="uname">তোমার নাম</label>
+                <input id="uname" type="text" placeholder="যেমন: অর্ণব দাস" maxlength="30" autocomplete="off" />
+                <div class="hint" id="uname-hint"></div>
+            </div>
+            <div class="set-select">
+                <label>সেট বেছে নাও</label>
+                <div class="set-grid" id="set-grid"></div>
+            </div>
+            <button class="btn-primary" id="start-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="currentColor"/></svg> কুইজ শুরু</button>
+        </div>
+    </div>
+
+    <!-- ========== QUIZ ========== -->
+    <div class="card" id="screen-quiz" style="display:none;">
+        <div class="quiz-top">
+            <div class="who"><div class="avatar" id="avatar-init">অ</div><div><div class="name" id="who-name">—</div><div class="setname" id="who-set">সেট ১</div></div></div>
+            <div class="timer" id="timer-box"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="1.8"/></svg><span id="timer-text">00:30</span></div>
+        </div>
+        <div class="progress-wrap">
+            <div class="progress-text"><span id="progress-label">প্রশ্ন ১ / ১৫</span><span id="score-label">স্কোর: ০</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="qdots" id="qdots"></div>
+        <div class="qbody">
+            <span class="qnum-tag" id="qnum-tag">প্রশ্ন ১</span>
+            <p class="qtext" id="qtext">প্রশ্ন লোড হচ্ছে...</p>
+            <div class="options" id="options"></div>
+            <div class="explain" id="explain"></div>
+        </div>
+        <div class="qfoot">
+            <button class="btn-ghost" id="quit-btn">ছাড়ো</button>
+            <button class="btn-next" id="next-btn" disabled><span id="next-label">পরের প্রশ্ন</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2"/></svg></button>
+        </div>
+    </div>
+
+    <!-- ========== RESULT ========== -->
+    <div class="card" id="screen-result" style="display:none;">
+        <div class="result">
+            <div class="ring-wrap">
+                <svg viewBox="0 0 170 170" width="170" height="170">
+                    <circle class="ring-bg" cx="85" cy="85" r="72"/>
+                    <circle class="ring-fg" id="ring-fg" cx="85" cy="85" r="72" stroke="url(#gradRing)"/>
+                    <defs><linearGradient id="gradRing" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8a2e3f"/><stop offset="100%" stop-color="#c9a87c"/></linearGradient></defs>
+                </svg>
+                <div class="ring-center"><div class="pct" id="ring-pct">০%</div><div class="lbl">ফলাফল</div></div>
+            </div>
+            <h2 id="result-title">দারুণ!</h2>
+            <p class="greet" id="result-greet">শুভেচ্ছা, —</p>
+            <div class="stat-row">
+                <div class="stat-box correct"><div class="v" id="stat-correct">0</div><div class="l">সঠিক</div></div>
+                <div class="stat-box wrong"><div class="v" id="stat-wrong">0</div><div class="l">ভুল</div></div>
+                <div class="stat-box"><div class="v" id="stat-time">0s</div><div class="l">সময়</div></div>
+            </div>
+            <div class="result-actions">
+                <button class="btn-ghost" id="retry-btn">আবার দাও</button>
+                <button class="btn-primary" id="newset-btn" style="background:linear-gradient(180deg,#2d4a5e,#1d3344);color:#fff;box-shadow:0 8px 18px -8px rgba(29,44,58,0.5);">নতুন সেট</button>
+            </div>
+            <div class="review-toggle" id="review-toggle">উত্তর বিস্তারিত দেখো ↓</div>
+            <div class="review-list" id="review-list"></div>
+        </div>
+    </div>
+    <div class="footer-mark">দশম শ্রেণি · ইতিহাস · তৃতীয় অধ্যায় — ১২০টি প্রশ্ন</div>
+</div>
+
+<script>
+// ============================================================
+// 🔐 LOGIN
+// ============================================================
+const VALID_USERS = { 'Ajay21':'Ajay7890', 'Sagun12':'Sagun1223' };
+let loggedInUser = null;
+
+// ============================================================
+// 📚 8 SETS × 15 QUESTIONS = 120 (সম্পূর্ণ তৃতীয় অধ্যায়)
+// ============================================================
+const QUIZ_SETS = [{
+    id:1, title:'সেট ১', subtitle:'অরণ্য আইন ও চুয়াড় বিদ্রোহ (টপিক ৩.১)',
+    questions:[
+        {q:'ভারতে প্রথম অরণ্য আইন (Indian Forest Act) কবে পাস হয়?',opts:['১৮৫৫ খ্রিস্টাব্দে','১৮৬৪ খ্রিস্টাব্দে','১৮৬৫ খ্রিস্টাব্দে','১৮৭৮ খ্রিস্টাব্দে'],ans:2,exp:'ডেইট্রিক ব্রান্ডিসের প্রচেষ্টায় ১৮৬৪ খ্রিস্টাব্দে ভারতে বন বিভাগ গঠিত হওয়ার পর ১৮৬৫ খ্রিস্টাব্দে প্রথম ভারতীয় অরণ্য আইন পাস করে সরকার অরণ্যের ওপর অধিকার প্রতিষ্ঠা করেছিল।'},
+        {q:'ব্রিটিশ সরকার কাকে ভারতের প্রথম বন বিভাগের ইনস্পেকটর জেনারেল হিসেবে নিযুক্ত করেছিল?',opts:['ডেইট্রিক ব্রান্ডিস','ভয়েলকার','ক্যাপ্টেন উইলকিনসন','ওয়ারেন হেস্টিংস'],ans:0,exp:'জার্মানির বনাঞ্চল বিশারদ ডেইট্রিক ব্রান্ডিসকে ব্রিটিশ সরকার ভারতের প্রথম ইনস্পেকটর জেনারেল হিসেবে নিযুক্ত করেছিল, যিনি গাছ কাটা এবং পশুচারণ নিয়ন্ত্রণের প্রয়োজনীয়তা অনুভব করেছিলেন।'},
+        {q:'১৮৭৮ খ্রিস্টাব্দের সংশোধিত অরণ্য আইনে অরণ্যকে কয়টি ভাগে ভাগ করা হয়েছিল?',opts:['দুটি','তিনটি','চারটি','পাঁচটি'],ans:1,exp:'১৮৭৮ খ্রিস্টাব্দের সংশোধিত বনাঞ্চল আইনে অরণ্যকে তিনটি ভাগে ভাগ করা হয়— সংরক্ষিত অরণ্য, সুরক্ষিত অরণ্য এবং গ্রাম্য বনাঞ্চল।'},
+        {q:'মেদিনীপুরের লক্ষ্মীবাই কাকে বলা হয়?',opts:['রানি ভবানী','রানি দুর্গাবতী','রানি শিরোমণি','দেবী চৌধুরাণী'],ans:2,exp:'চুয়াড় বিদ্রোহের দ্বিতীয় পর্বে (১৭৯৮-৯৯) অসামান্য ও নির্ভীক ভূমিকা গ্রহণের জন্য রানি শিরোমণিকে "মেদিনীপুরের লক্ষ্মীবাই" বলা হয়।'},
+        {q:'চুয়াড় বিদ্রোহের দ্বিতীয় পর্ব কার নেতৃত্বে ব্যাপক আকার ধারণ করেছিল?',opts:['দুর্জন সিং','জগন্নাথ সিংহ','গোবর্ধন দিকপতি','অচল সিংহ'],ans:0,exp:'১৭৯৮-৯৯ খ্রিস্টাব্দে রাজা দুর্জন সিংয়ের নেতৃত্বে প্রায় ১৫০০ চুয়াড় ঐক্যবদ্ধ হয়ে মেদিনীপুর ও তার পার্শ্ববর্তী অঞ্চলে আক্রমণ চালায় এবং এটি ব্যাপক আকার ধারণ করে।'},
+        {q:'জঙ্গলমহল নামে বিশেষ জেলাটি কবে গঠিত হয়?',opts:['১৭৯৯ খ্রিস্টাব্দে','১৮০৫ খ্রিস্টাব্দে','১৮২০ খ্রিস্টাব্দে','১৮৩৩ খ্রিস্টাব্দে'],ans:1,exp:'চুয়াড় বিদ্রোহের পর সরকারি নিয়ন্ত্রণ প্রতিষ্ঠা ও শান্তি-শৃঙ্খলা বজায় রাখার উদ্দেশ্যে ১৮০৫ খ্রিস্টাব্দে বাঁকুড়া, মেদিনীপুর ও বীরভূমের একাংশ নিয়ে "জঙ্গলমহল" নামে এই বিশেষ জেলা গঠন করা হয়েছিল।'},
+        {q:'রংপুর বিদ্রোহ (১৭৮৩) কার শোষণের বিরুদ্ধে সংঘটিত হয়েছিল?',opts:['গোকুল ঘোষাল','দেবী সিংহ','জগন্নাথ সিংহ','ওয়ারেন হেস্টিংস'],ans:1,exp:'কোম্পানির ইজারাদার দেবী সিংহ দিনাজপুর ও রংপুর অঞ্চলে অতিরিক্ত রাজস্ব আদায়ের নামে তীব্র অত্যাচার শুরু করলে কৃষকরা রংপুর বিদ্রোহ ঘোষণা করেছিল।'},
+        {q:'চুয়াড়দের একাংশ "পাইক" হিসেবে কাজ করে বেতনের পরিবর্তে যে নিষ্কর জমি ভোগ করত তাকে কী বলা হতো?',opts:['খুৎকাঠি','পাইকান','দিকু','দামিন-ই-কোহ'],ans:1,exp:'চুয়াড় আদিবাসীরা প্রাচীন প্রথায় স্থানীয় জমিদারদের অধীনে পাইক বা লেঠেল বাহিনীর কাজ করত এবং বেতনের পরিবর্তে তারা "পাইকান" বা নিষ্কর জমি ভোগ করত।'},
+        {q:'রংপুর বিদ্রোহে কৃষকরা কার নেতৃত্বে বিদ্রোহ ঘোষণা করেছিল?',opts:['ভবানী পাঠক','মজনু শাহ','নূরুলউদ্দিন','দুর্জন সিং'],ans:2,exp:'অতিরিক্ত রাজস্ব আদায়ের প্রতিবাদ স্বরূপ ১৭৮৩ খ্রিস্টাব্দের ১৮ জানুয়ারি রংপুরের কৃষকরা নূরুলউদ্দিনের নেতৃত্বে বিদ্রোহে ঝাঁপিয়ে পড়েছিল।'},
+        {q:'ভয়েলকার রেজোলিউশন (Voelcker Resolution) কবে পাস হয়?',opts:['১৮৬৫ খ্রিস্টাব্দে','১৮৭৮ খ্রিস্টাব্দে','১৮৯৪ খ্রিস্টাব্দে','১৯২৭ খ্রিস্টাব্দে'],ans:2,exp:'জার্মান কৃষিবিদ ভয়েলকার ১৮৯৪ খ্রিস্টাব্দে এদেশে আসেন এবং তাঁর পরামর্শমতো এই রেজোলিউশন পাস হলে বনাঞ্চলের ওপর ঔপনিবেশিক শাসকের কর্তৃত্ব আরও দৃঢ় হয়।'},
+        {q:'ব্রিটিশ সরকার অরণ্যের ওপর আধিপত্য প্রতিষ্ঠার জন্য ফরেস্ট চার্টার (অরণ্য সনদ) কবে পাস করেছিল?',opts:['১৮৪০ খ্রিস্টাব্দে','১৮৫৫ খ্রিস্টাব্দে','১৮৬৪ খ্রিস্টাব্দে','১৮৬৫ খ্রিস্টাব্দে'],ans:1,exp:'প্রাক্-ঔপনিবেশিক আমলে আদিবাসীদের অরণ্য সম্পদের অবাধ ব্যবহার বন্ধ করে ব্রিটিশ সরকার ১৮৫৫ খ্রিস্টাব্দে ফরেস্ট চার্টার পাস করে অরণ্যের ওপর আধিপত্য প্রতিষ্ঠা করেছিল।'},
+        {q:'চুয়াড় বিদ্রোহের প্রথম পর্বে (১৭৬৭-৬৮) কে নেতৃত্ব দিয়েছিলেন?',opts:['দুর্জন সিং','রানি শিরোমণি','জগন্নাথ সিংহ','লাল সিংহ'],ans:2,exp:'আদিবাসী ঐতিহ্যে আঘাত এবং নতুন ভূমি ব্যবস্থার কারণে ঘাটশিলার জমিদার জগন্নাথ সিংহের নেতৃত্বে ১৭৬৭-৬৮ খ্রিস্টাব্দে চুয়াড় বিদ্রোহের প্রথম পর্ব শুরু হয়।'},
+        {q:'সন্দীপ বিদ্রোহ (১৭৬৯) কার শোষণের বিরুদ্ধে সংঘটিত হয়েছিল?',opts:['দেবী সিংহ','গোকুল ঘোষাল','ক্যাপ্টেন রজার্স','ক্যাপ্টেন টমাস'],ans:1,exp:'রাজস্ব সচিব বা আহাদদার গোকুল ঘোষালের শোষণ ও চুক্তির বাইরে অত্যাধিক কর আদায়ের বিরুদ্ধে সন্দীপবাসী যে বিদ্রোহ ঘোষণা করেছিল তা সন্দীপ বিদ্রোহ নামে পরিচিত।'},
+        {q:'"চোয়ারদের এই বিদ্রোহ ছিল নিম্নশ্রেণির লোকেদের স্বতঃস্ফূর্ত অথচ ব্যাপক এক বিদ্রোহ।" - কথাটি কে বলেছেন?',opts:['সুপ্রকাশ রায়','নরহরি কবিরাজ','শশীভূষণ চৌধুরী','রমেশচন্দ্র মজুমদার'],ans:1,exp:'এই বিদ্রোহে মূল শক্তি কৃষক ছিল বলে অধ্যাপক নরহরি কবিরাজ চুয়াড় বিদ্রোহ সম্পর্কে এই উক্তিটি করেছেন এবং একে কৃষক বিদ্রোহ বলতে চেয়েছেন।'},
+        {q:'চুয়াড়রা রায়পুর পরগনার কয়টি গ্রামে তাদের শাসন প্রতিষ্ঠা করেছিল?',opts:['১০টি','২০টি','৩০টি','৪০টি'],ans:2,exp:'দুর্জন সিংয়ের নেতৃত্বে বিদ্রোহীরা তীব্র আক্রমণ চালিয়ে রায়পুর পরগনার ৩০টি গ্রামে নিজেদের শাসন প্রতিষ্ঠিত করেছিল এবং সরকারি দফতর আক্রমণ করেছিল।'}
+    ]
+},{
+    id:2, title:'সেট ২', subtitle:'কোল বিদ্রোহ ও ভিল বিদ্রোহ (টপিক ৩.১)',
+    questions:[
+        {q:'কোল বিদ্রোহ (১৮৩১-৩৩) প্রধানত কোন্ অঞ্চলে সংঘটিত হয়েছিল?',opts:['জঙ্গলমহল','ছোটোনাগপুর','রাজমহল পাহাড়','খান্দেশ'],ans:1,exp:'ঔপনিবেশিক শাসনকালে এ দেশে সংঘটিত উপজাতি বিদ্রোহগুলির মধ্যে অন্যতম কোল বিদ্রোহটি বিহারের ছোটোনাগপুর অঞ্চলের জঙ্গলে বসবাসকারী কোলদের দ্বারা সংঘটিত হয়েছিল।'},
+        {q:'কোল বিদ্রোহের সময় উপজাতিরা বহিরাগত মহাজনদের কী বলত?',opts:['খুৎকাঠি','পাইকান','দিকু','কেনারাম'],ans:2,exp:'ব্রিটিশ শাসনভার প্রতিষ্ঠিত হওয়ার পর সেখানে বহিরাগত যে মহাজনরা ইজারাদার হিসেবে নিযুক্ত হয়ে কোলদের ওপর শোষণ চালাত, কোলরা তাদের "দিকু" বলত।'},
+        {q:'১৮২০-২১ খ্রিস্টাব্দে কোলদের "চাইবাসার যুদ্ধ"-এ কে পরাজিত করেছিল?',opts:['ক্যাপ্টেন টমাস','মেজর উইলিয়ামস','ইংরেজ সেনাপতি রোগসেস','কর্নেল আউট্রাম'],ans:2,exp:'কোলরা প্রথমবার বিদ্রোহ করলে পোড়াহাটের জমিদার এবং তার সহযোগী ইংরেজ সেনাপতি রোগসেস কোলদের "চাইবাসার যুদ্ধ"-এ পরাজিত করে অত্যাচার আরও বাড়িয়ে দেয়।'},
+        {q:'কোল বিদ্রোহের অন্যতম নেতা কে ছিলেন?',opts:['দুর্জন সিং','বিরসা মুন্ডা','সুই মুন্ডা','ভবানী পাঠক'],ans:2,exp:'১৮৩১-৩২ খ্রিস্টাব্দে কোলরা আবার ঐক্যবদ্ধ হয়ে বিদ্রোহ করলে সেই বিদ্রোহের অন্যতম প্রধান নেতারা ছিলেন বুলু ভকত, জোয়া ভকত, সুই মুন্ডা, ঝিন্দরাই মানকি প্রমুখ।'},
+        {q:'কোন্ ইংরেজ ক্যাপ্টেনের নেতৃত্বে কোল বিদ্রোহ দমন করা হয়েছিল?',opts:['ক্যাপ্টেন রজার্স','ক্যাপ্টেন উইলকিনসন','ক্যাপ্টেন এডওয়ার্ডস','লেফট্যান্যান্ট মরিসন'],ans:1,exp:'রাঁচি, মানভূম ও সিংভূমে বিদ্রোহ তীব্র আকার ধারণ করলে ১৮৩৩ খ্রিস্টাব্দে ক্যাপ্টেন উইলকিনসনের নেতৃত্বে সেনাবাহিনী এই বিদ্রোহ দমন করে।'},
+        {q:'কোল বিদ্রোহের পর ১৮৩৪ খ্রিস্টাব্দে উপজাতিদের জন্য কোন্ পৃথক অঞ্চলটি নির্দিষ্ট করা হয়?',opts:['জঙ্গলমহল','সাঁওতাল পরগনা','দক্ষিণ-পশ্চিম সীমান্ত এজেন্সি','দামিন-ই-কোহ'],ans:2,exp:'বিদ্রোহের ফলস্বরূপ সরকার উপজাতিদের স্বতন্ত্র নিয়মকানুন চালু করার জন্য ১৮৩৪ খ্রিস্টাব্দে "দক্ষিণ-পশ্চিম সীমান্ত এজেন্সি" নামে একটি আলাদা জায়গা নির্দিষ্ট করে দেয়।'},
+        {q:'"ইংরেজ শাসন ধ্বংস করাই ছিল এই বিদ্রোহের প্রধান উদ্দেশ্য"— কোল বিদ্রোহ সম্পর্কে এই মতটি কার?',opts:['জগদীশচন্দ্র ঝা','মেজর সাদারল্যান্ড','ভেরিয়ার এলউইন','চার্লস মেটকাফ'],ans:3,exp:'কোল বিদ্রোহের উদ্দেশ্য বিশ্লেষণ করতে গিয়ে চার্লস মেটকাফ এই সিদ্ধান্ত জানিয়েছিলেন যে, ইংরেজ শাসন ধ্বংস করাই ছিল এই বিদ্রোহের প্রধান উদ্দেশ্য।'},
+        {q:'কোন্ ঐতিহাসিক মনে করেন কোলদের জমি হাতছাড়া হওয়ার জন্যই কোল বিদ্রোহ হয়েছিল?',opts:['জগদীশচন্দ্র ঝা','ভেরিয়ার এলউইন','চার্লস মেটকাফ','সুপ্রকাশ রায়'],ans:1,exp:'ঐতিহাসিক ভেরিয়ার এলউইন কোল বিদ্রোহের কারণ বিশ্লেষণ করে মনে করেন যে, নিজস্ব জমি হাতছাড়া হওয়াই ছিল এই আদিবাসী বিদ্রোহের মূল কারণ।'},
+        {q:'ভিল বিদ্রোহ (১৮১৯ খ্রি.) কোন অঞ্চলে সংঘটিত হয়েছিল?',opts:['ছোটোনাগপুর','রাজমহল','জঙ্গলমহল','খান্দেশ বা পশ্চিমঘাট পার্বত্য অঞ্চল'],ans:3,exp:'১৮১৮ খ্রিস্টাব্দে কোম্পানি দাক্ষিণাত্যের খান্দেশ অঞ্চল অধিকার করলে পশ্চিমঘাট পার্বত্য অঞ্চলে বসবাসকারী ভিলরা ব্রিটিশদের কর্তৃত্ব মানতে অস্বীকার করে বিদ্রোহ ঘোষণা করেছিল।'},
+        {q:'ভিল বিদ্রোহের অন্যতম নেতা কে ছিলেন?',opts:['দুর্জন সিং','চিল নায়েক','সুই মুন্ডা','গয়া মুন্ডা'],ans:1,exp:'ভিল বিদ্রোহের সময় চিল নায়েক, হিরিয়া, শিউরাম প্রমুখের নেতৃত্বে সাতপুরা, সাতমালা ও অজন্তা অঞ্চলে বিদ্রোহ দ্রুত ছড়িয়ে পড়েছিল।'},
+        {q:'কোন ইংরেজ কর্নেলের তীব্র দমননীতির কারণে ১৮২৭ খ্রিস্টাব্দে ভিল বিদ্রোহ ব্যর্থ হয়?',opts:['ক্যাপ্টেন রজার্স','মেজর উইলিয়ামস','কর্নেল আউট্রাম','ক্যাপ্টেন উইলকিনসন'],ans:2,exp:'১৮২৭ খ্রিস্টাব্দে কর্নেল আউট্রামের তীব্র দমননীতির ফলে ভিল বিদ্রোহ সাময়িকভাবে দমিত ও ব্যর্থ হয়, যদিও ১৮৪৬ সাল পর্যন্ত বিক্ষিপ্তভাবে এটি চলেছিল।'},
+        {q:'কৃষকদের অসন্তোষই ছিল কোল বিদ্রোহের প্রধান কারণ - এটি কে মনে করেন?',opts:['মেজর সাদারল্যান্ড','জগদীশচন্দ্র ঝা','ভেরিয়ার এলউইন','ক্যাথলিন গফ'],ans:1,exp:'কোল বিদ্রোহের প্রকৃতি বিশ্লেষণ করতে গিয়ে ঐতিহাসিক জগদীশচন্দ্র ঝা তাঁর তত্ত্বে দেখিয়েছেন যে কৃষি অসন্তোষই ছিল এই বিদ্রোহের প্রধান কারণ।'},
+        {q:'ক্যাথলিন গফ কোল বিদ্রোহকে কী ধরনের বিদ্রোহ বলে মনে করেন?',opts:['সামন্ত বিদ্রোহ','জাতীয় বিদ্রোহ','অধিকার পুনরুদ্ধারের আকাঙ্ক্ষা','ধর্মযুদ্ধ'],ans:2,exp:'সমাজতাত্ত্বিক ক্যাথলিন গফ এই পর্বের অন্যান্য বিদ্রোহগুলির পাশাপাশি কোল বিদ্রোহের মধ্যেও কোলদের হারিয়ে যাওয়া অধিকার পুনরুদ্ধারের আকাঙ্ক্ষাই খুঁজে পেয়েছেন।'},
+        {q:'কোলরা বিদ্রোহের বার্তা গ্রাম থেকে গ্রামান্তরে কীভাবে ছড়িয়ে দিত?',opts:['চিঠি পাঠিয়ে','পত্রিকা ছেপে','তির বা আমগাছের শাখা বিলি করে অথবা নাকাড়া বাজিয়ে','গুপ্তচরের মাধ্যমে'],ans:2,exp:'বিদ্রোহের বিস্তার ঘটাতে কোলরা তির বা আমগাছের শাখা বিলি করে অথবা নাকাড়া বাজিয়ে গ্রাম থেকে গ্রামান্তরে তাদের বার্তা পৌঁছে দিত।'},
+        {q:'কোল বিদ্রোহের কারণে ইংরেজ সরকার কোন্ নতুন ব্যবস্থা বাতিল করে দেয়?',opts:['চিরস্থায়ী বন্দোবস্ত','নীলচাষ','পুরনো জমিদার ও বহিরাগতদের জমি কোলদের ফিরিয়ে দেওয়া হয় এবং রাজস্ব হ্রাস করা হয়','আফিম চাষ'],ans:2,exp:'বিদ্রোহের পর জমিদার ও বহিরাগতরা যেসব জমি কেড়ে নিয়েছিল সেগুলি আবার কোলদের ফিরিয়ে দেওয়া হয় এবং রাজস্বের পরিমাণ হ্রাস করা হয়।'}
+    ]
+},{
+    id:3, title:'সেট ৩', subtitle:'সাঁওতাল বিদ্রোহ বা হুল (টপিক ৩.১)',
+    questions:[
+        {q:'"হুল" শব্দের অর্থ কী?',opts:['যুদ্ধ','বিদ্রোহ','স্বাধীনতা','অরণ্য'],ans:1,exp:'সাঁওতালরা তাদের এই সশস্ত্র অভ্যুত্থানকে "হুল" নামে ডাকত, যার অর্থ হলো বিদ্রোহ।'},
+        {q:'সাঁওতাল বিদ্রোহ (১৮৫৫-৫৬) কবে শুরু হয়েছিল?',opts:['১৮৫৫ খ্রিস্টাব্দের ৩০ জুন','১৮৫৬ খ্রিস্টাব্দের ১০ জানুয়ারি','১৮৫৫ খ্রিস্টাব্দের ২৪ ডিসেম্বর','১৮৫৬ খ্রিস্টাব্দের ২৬ জুলাই'],ans:0,exp:'১৮৫৫ খ্রিস্টাব্দের ৩০ জুন প্রায় ১০,০০০ সাঁওতাল একত্রিত হয়ে আনুষ্ঠানিকভাবে "হুল" বা বিদ্রোহ ঘোষণা করে।'},
+        {q:'সাঁওতাল বিদ্রোহের প্রধান নেতা কে কে ছিলেন?',opts:['ডোমন মাঝি ও কালো প্রামাণিক','সিধু ও কানহু','সুই মুন্ডা ও গয়া মুন্ডা','চাঁদ ও ভৈরব'],ans:1,exp:'সিধু ও কানহুর নেতৃত্বেই সাঁওতালরা স্বাধীন সাঁওতাল রাজ্য প্রতিষ্ঠার লক্ষ্যে মহাজন ও সরকারের বিরুদ্ধে সশস্ত্র বিদ্রোহের পথ গ্রহণ করেছিল।'},
+        {q:'সাঁওতালরা বনভূমি পরিষ্কার করে যে নতুন এলাকায় বসবাস শুরু করে তার নাম কী দিয়েছিল?',opts:['জঙ্গলমহল','ছোটোনাগপুর','দামিন-ই-কোহ','সাঁওতাল পরগনা'],ans:2,exp:'কোম্পানির অত্যাচারে অতিষ্ঠ হয়ে সাঁওতালরা রাজমহলের পার্বত্য অঞ্চলে এসে বনভূমি পরিষ্কার করে নতুনভাবে বসবাস শুরু করে এবং ওই অঞ্চলের নাম দেয় দামিন-ই-কোহ।'},
+        {q:'"দামিন-ই-কোহ" শব্দের অর্থ কী?',opts:['পাহাড়ের চূড়া','পাহাড়ের প্রান্তদেশ','গভীর জঙ্গল','পবিত্র ভূমি'],ans:1,exp:'রাজমহল পার্বত্য অঞ্চলের যে স্থানে সাঁওতালরা বসতি স্থাপন করেছিল, সেই "দামিন-ই-কোহ" শব্দের অর্থ হলো পাহাড়ের প্রান্তদেশ।'},
+        {q:'সাঁওতাল বিদ্রোহের সময় মহাজনরা সাঁওতালদের ঠকানোর জন্য বেশি ওজনের যে বাটখারা ব্যবহার করত তার নাম কী ছিল?',opts:['কেনারাম','বেচারাম','দিকু','মহাজন-বাটখারা'],ans:0,exp:'দ্রব্য কেনাবেচার সময় সাঁওতালদের ঠকানোর জন্য মহাজনরা বেশি ওজনের বাটখারা ব্যবহার করত যা "কেনারাম" নামে পরিচিত ছিল।'},
+        {q:'সাঁওতালরা কোথায় একত্রিত হয়ে প্রথম বিদ্রোহ ঘোষণা করেছিল?',opts:['ভাগলপুরে','মুর্শিদাবাদে','ভাগনাডিহির মাঠে','ছোটোনাগপুরে'],ans:2,exp:'সিধু ও কানহুর নেতৃত্বে প্রায় ১০,০০০ সাঁওতাল ভাগনাডিহির মাঠে একত্রিত হয়ে প্রথম বিদ্রোহের ডাক দিয়েছিল।'},
+        {q:'সাঁওতাল বিদ্রোহের ফলে ব্রিটিশ সরকার সাঁওতালদের জন্য কোন্ নতুন জেলা গঠন করে?',opts:['জঙ্গলমহল','সাঁওতাল পরগনা','দক্ষিণ-পশ্চিম সীমান্ত এজেন্সি','ভাগলপুর'],ans:1,exp:'বিদ্রোহ দমিত হলেও এর ফলে সাঁওতালদের পৃথক উপজাতি হিসেবে স্বীকৃতি দেওয়া হয় এবং ১৮৫৬ খ্রিস্টাব্দে তাদের জন্য "সাঁওতাল পরগনা" নামে একটি নতুন জেলা গঠন করা হয়।'},
+        {q:'"এই বিদ্রোহ ছিল ভারতের প্রথম মুক্তিসংগ্রাম" — সাঁওতাল বিদ্রোহ সম্পর্কে এই কথাটি কে বলেছেন?',opts:['বিপান চন্দ্র','সুপ্রকাশ রায়','নরহরি কবিরাজ','রমেশচন্দ্র মজুমদার'],ans:1,exp:'ঐতিহাসিক সুপ্রকাশ রায় সাঁওতাল বিদ্রোহের প্রাবল্য বিশ্লেষণ করে এই বিদ্রোহকে ভারতের প্রথম মুক্তিসংগ্রাম বলে মনে করেন।'},
+        {q:'কোন্ পত্রিকা লিখেছিল যে সাঁওতালরা প্রতাপশালী ব্রিটিশ সরকারকে লড়াই দেওয়ার ক্ষমতা রাখে?',opts:['সংবাদ প্রভাকর','সমাচার দর্পণ','হিন্দু প্যাট্রিয়ট','গ্রামবার্ত্তা প্রকাশিকা'],ans:2,exp:'১৮৫৫ খ্রিস্টাব্দের ২৬ জুলাইয়ের হিন্দু প্যাট্রিয়ট পত্রিকায় সাঁওতালদের প্রতাপশালী ব্রিটিশ সরকারকে লড়াই দেওয়ার ক্ষমতায় বিস্ময় প্রকাশ করা হয়েছিল।'},
+        {q:'সাঁওতাল বিদ্রোহ দমনে ইংরেজদের কত নম্বর পদাতিক বাহিনী অংশগ্রহণ করেছিল?',opts:['১০নং পদাতিক বাহিনী','২২নং পদাতিক বাহিনী','৫৫নং পদাতিক বাহিনী','৭২নং পদাতিক বাহিনী'],ans:2,exp:'১৮৫৬ খ্রিস্টাব্দের ফেব্রুয়ারি মাসে ইংরেজদের ৫৫নং পদাতিক বাহিনী অত্যন্ত নিষ্ঠুরতার সঙ্গে প্রায় ২৩,০০০ সাঁওতালকে হত্যা করে বিদ্রোহ দমন করেছিল।'},
+        {q:'সাঁওতাল বিদ্রোহে ডোমন মাঝি, চাঁদ ও ভৈরবের পাশাপাশি আর কে নেতৃত্ব দিয়েছিলেন?',opts:['কালো প্রামাণিক','সুই মুন্ডা','গয়া মুন্ডা','রানি শিরোমণি'],ans:0,exp:'সিধু ও কানহুর পাশাপাশি ডোমন মাঝি, চাঁদ, ভৈরব এবং কালো প্রামাণিক প্রমুখ নেতা এই বিদ্রোহে অত্যন্ত গুরুত্বপূর্ণ ভূমিকা পালন করেছিলেন।'},
+        {q:'ডব্লিউ. জি. আর্চারের মতে সাঁওতাল বিদ্রোহের প্রধান কারণ কী ছিল?',opts:['অরণ্যে অধিকার','মহাজনদের শোষণ','স্বাধীনতার আকাঙ্ক্ষা','জোরপূর্বক ধর্মান্তকরণ'],ans:2,exp:'গবেষক ডব্লিউ. জি. আর্চারের মতে, এই বিদ্রোহের প্রধান কারণ ছিল সাঁওতালদের স্বাধীনতার আকাঙ্ক্ষা।'},
+        {q:'সাঁওতাল বিদ্রোহকে "নিম্নশ্রেণির গণবিদ্রোহ" বলে কে আখ্যায়িত করেছেন?',opts:['সুপ্রকাশ রায়','বরুণ দে','রমেশচন্দ্র মজুমদার','নরহরি কবিরাজ'],ans:3,exp:'সাঁওতাল ছাড়াও কামার, কুমোর, তাঁতি, গোয়ালার মতো দরিদ্র ও নিম্নশ্রেণির মানুষের ব্যাপক অংশগ্রহণ দেখে অধ্যাপক নরহরি কবিরাজ একে "নিম্নশ্রেণির গণবিদ্রোহ" বলেছেন।'},
+        {q:'কোন্ ঐতিহাসিক সাঁওতাল বিদ্রোহকে মহাবিদ্রোহসহ পরবর্তী অন্যান্য কৃষক আন্দোলনের অনুপ্রেরণা স্থল বলে মনে করেন?',opts:['সুপ্রকাশ রায়','ড. রমেশচন্দ্র মজুমদার','বিপান চন্দ্র','অমলেশ ত্রিপাঠী'],ans:1,exp:'ড. রমেশচন্দ্র মজুমদার মনে করেন যে, সাঁওতাল বিদ্রোহ ছিল ১৮৫৭-র মহাবিদ্রোহসহ পরবর্তী অন্যান্য কৃষক আন্দোলনের মূল অনুপ্রেরণা স্থল।'}
+    ]
+},{
+    id:4, title:'সেট ৪', subtitle:'মুন্ডা বিদ্রোহ বা উলগুলান (টপিক ৩.১)',
+    questions:[
+        {q:'"উলগুলান" শব্দের অর্থ কী?',opts:['মুক্তিসংগ্রাম','বিরাট তোলপাড় বা ভয়ংকর বিশৃঙ্খলা','স্বাধীন রাজ্য','নবজাগরণ'],ans:1,exp:'১৮৯৯-১৯০০ খ্রিস্টাব্দে বিরসা মুন্ডার নেতৃত্বে সংঘটিত এই উপজাতি অভ্যুত্থানটি মুন্ডা ভাষায় "উলগুলান" অর্থাৎ বিরাট তোলপাড় বা ভয়ংকর বিশৃঙ্খলা বলে অভিহিত হয়।'},
+        {q:'মুন্ডা বিদ্রোহ কার নেতৃত্বে সংঘটিত হয়েছিল?',opts:['গয়া মুন্ডা','সুই মুন্ডা','বিরসা মুন্ডা','সিধু মুন্ডা'],ans:2,exp:'ছোটোনাগপুর অঞ্চলে ঔপনিবেশিক অপশাসনের কারণে ১৮৯৯-১৯০০ খ্রিস্টাব্দের মধ্যে বিরসা মুন্ডার নেতৃত্বে মুন্ডারা ঐক্যবদ্ধ হয়ে অভ্যুত্থানে অংশ নেয়।'},
+        {q:'মুন্ডাদের সমাজে যৌথ মালিকানায় চাষাবাদের চিরাচরিত প্রথাটিকে কী বলা হতো?',opts:['খুৎকাঠি প্রথা','পাইকান প্রথা','দাদনি প্রথা','রায়তি প্রথা'],ans:0,exp:'নতুন ভূমিব্যবস্থা চালু হওয়ার ফলে জমিতে ব্যক্তিমালিকানা প্রতিষ্ঠিত হলে মুন্ডাদের যৌথ মালিকানায় চাষাবাদের চিরাচরিত "খুৎকাঠি প্রথা"-র অবসান হয়, যা বিদ্রোহের একটি বড় কারণ ছিল।'},
+        {q:'মুন্ডারা বিরসা মুন্ডাকে কী নামে ডাকত?',opts:['সিংবোঙ্গা','ধরতি আবা বা পৃথিবীর পিতা','দিকু','বিদ্রোহী রাজা'],ans:1,exp:'বিরসা মুন্ডা স্বাধীন মুন্ডারাজ্য প্রতিষ্ঠার লক্ষ্যে মুন্ডাদের সংঘবদ্ধ করেছিলেন এবং তিনি তাদের কাছে "ধরতি আবা" বা "পৃথিবীর পিতা" নামে পরিচিত ছিলেন।'},
+        {q:'মুন্ডা বিদ্রোহের সেনাপতি কে ছিলেন?',opts:['বিরসা মুন্ডা','গয়া মুন্ডা','সুই মুন্ডা','চাঁদ মুন্ডা'],ans:1,exp:'রাঁচি, তামার, চক্রধরপুর প্রভৃতি এলাকায় বিদ্রোহ ছড়িয়ে পড়লে এই বিদ্রোহের সেনাপতি নিযুক্ত হয়েছিলেন গয়া মুন্ডা।'},
+        {q:'১৯০০ খ্রিস্টাব্দের ৯ জানুয়ারি কোন্ পাহাড়ে মুন্ডা বাহিনীর সঙ্গে ইংরেজদের যুদ্ধ হয়?',opts:['রাজমহল পাহাড়','সইল রাকার পাহাড়','রামগড় পাহাড়','দলমা পাহাড়'],ans:1,exp:'১৯০০ খ্রিস্টাব্দের ৯ জানুয়ারি "সইল রাকার পাহাড়ের যুদ্ধ"-এ মুন্ডা বাহিনী সরকারের আধুনিক সেনাদলের কাছে পরাজিত হয়।'},
+        {q:'বিরসা মুন্ডার উপাস্য দেবতা কে ছিলেন?',opts:['মারং বুরু','সিংবোঙ্গা বা সূর্যদেবতা','ধরতি আবা','মহাদেব'],ans:1,exp:'আধ্যাত্মিক চেতনার মাধ্যমে মুন্ডাদের ঐক্যবদ্ধ করতে বিরসা মুন্ডা "সিংবোঙ্গা" বা সূর্যদেবতাকে তাঁর উপাস্য দেবতা হিসেবে গ্রহণ করেছিলেন।'},
+        {q:'মুন্ডা বিদ্রোহের ফলে কবে "ছোটোনাগপুর প্রজাস্বত্ব আইন" বা "টেন্যান্সি অ্যাক্ট" পাস হয়?',opts:['১৯০০ খ্রিস্টাব্দে','১৯০৫ খ্রিস্টাব্দে','১৯০৮ খ্রিস্টাব্দে','১৯১৪ খ্রিস্টাব্দে'],ans:2,exp:'মুন্ডা বিদ্রোহ সম্পূর্ণ ব্যর্থ হয়নি, এর ফলে ব্রিটিশ সরকার ১৯০৮ খ্রিস্টাব্দে ছোটোনাগপুর প্রজাস্বত্ব আইন (টেন্যান্সি অ্যাক্ট) পাস করতে বাধ্য হয়েছিল।'},
+        {q:'বিরসা মুন্ডার কোথায় এবং কীভাবে মৃত্যু হয়?',opts:['সইল রাকার পাহাড়ে পুলিশের গুলিতে','রাঁচির কারাগারে কলেরায়','ফাঁসির মঞ্চে','দ্বীপান্তরে'],ans:1,exp:'যুদ্ধে পরাজিত হয়ে বন্দি হওয়ার পর ১৯০০ খ্রিস্টাব্দের ৯ জুন রাঁচির কারাগারে কলেরায় আক্রান্ত হয়ে বিরসা মুন্ডার মৃত্যু হয়।'},
+        {q:'মুন্ডা বিদ্রোহ কবে শুরু হয়েছিল?',opts:['১৮৫৫ খ্রিস্টাব্দের ৩০ জুন','১৮৮৬ খ্রিস্টাব্দে','১৮৯৯ খ্রিস্টাব্দের ২৪ ডিসেম্বর','১৯০০ খ্রিস্টাব্দের ৯ জানুয়ারি'],ans:2,exp:'মুন্ডাদের দাবিদাওয়াগুলি ব্রিটিশ সরকার অগ্রাহ্য করলে বিরসা মুন্ডার নেতৃত্বে ১৮৯৯ খ্রিস্টাব্দের ২৪ ডিসেম্বর এই সশস্ত্র মুন্ডা বিদ্রোহের সূত্রপাত হয়।'},
+        {q:'মুন্ডাদের বিদ্রোহের ফলে পাস হওয়া ছোটোনাগপুর প্রজাস্বত্ব আইনে কোন প্রথাকে স্বীকৃতি দেওয়া হয়?',opts:['পাইকান প্রথা','দাদনি প্রথা','খুৎকাঠি প্রথা','বেগার প্রথা'],ans:2,exp:'১৯০৮ খ্রিস্টাব্দের এই আইনের মাধ্যমে মুন্ডাদের অন্যতম প্রধান দাবি অনুযায়ী তাদের যৌথ মালিকানার "খুৎকাঠি প্রথা"-কে কিছুটা স্বীকৃতি দেওয়া হয়।'},
+        {q:'মুন্ডা বিদ্রোহকে "কৃষক বিদ্রোহ" বলে কে আখ্যায়িত করেছেন?',opts:['সুপ্রকাশ রায়','নরহরি কবিরাজ','রমেশচন্দ্র মজুমদার','বিপান চন্দ্র'],ans:1,exp:'ছোটোনাগপুর অঞ্চলে জমিদার ও মহাজনদের শোষণের বিরুদ্ধে কৃষকরাও যোগ দিয়েছিল বলে অধ্যাপক নরহরি কবিরাজ একে "কৃষক বিদ্রোহ" বলেছেন।'},
+        {q:'বিরসা মুন্ডার অনুগামীরা পরবর্তীকালে কী নামে পরিচিত হয়?',opts:['বিরসাইট','হেদায়তী','ফরাজি','পাগলপন্থী'],ans:0,exp:'বিরসা মুন্ডার মৃত্যুর পরেও এই বিদ্রোহকে কেন্দ্র করে বিরসার অনুগামীরা "বিরসা সম্প্রদায়" বা "বিরসাইট" গঠন করে তাদের রাজনৈতিক চেতনা টিকিয়ে রেখেছিল।'},
+        {q:'মুন্ডারা তাদের ওপর অত্যাচারের বিরুদ্ধে ঐক্যবদ্ধ হয়ে কবে মহারানি ভিক্টোরিয়ার কাছে প্রতিবাদপত্র পাঠিয়েছিল?',opts:['১৮৮৬ খ্রিস্টাব্দে','১৮৯০ খ্রিস্টাব্দে','১৮৯৯ খ্রিস্টাব্দে','১৯০০ খ্রিস্টাব্দে'],ans:0,exp:'সশস্ত্র বিদ্রোহের আগে মুন্ডারা নিয়মতান্ত্রিক পথে ১৮৮৬ খ্রিস্টাব্দে ঐক্যবদ্ধ হয়ে মহারানি ভিক্টোরিয়ার কাছে প্রতিবাদপত্র পাঠিয়েছিল, কিন্তু সরকার তাতে কর্ণপাত করেনি।'},
+        {q:'মুন্ডারা কোথায় বসবাস করত?',opts:['জঙ্গলমহলে','ছোটোনাগপুর ও তার পার্শ্ববর্তী অঞ্চলের অরণ্যে','রাজমহল পাহাড়ে','খান্দেশে'],ans:1,exp:'ভারতের আদিমতম অধিবাসী হিসেবে পরিচিত মুন্ডারা মূলত ছোটোনাগপুর ও তার পার্শ্ববর্তী অঞ্চলের অরণ্যে স্বাধীনভাবে বসবাস করত।'}
+    ]
+},{
+    id:5, title:'সেট ৫', subtitle:'সন্ন্যাসী-ফকির ও পাগলপন্থী বিদ্রোহ (টপিক ৩.২)',
+    questions:[
+        {q:'সন্ন্যাসী ও ফকির বিদ্রোহ কবে শুরু হয়েছিল?',opts:['১৭৫৭ খ্রিস্টাব্দে','১৭৬৩ খ্রিস্টাব্দে','১৭৮৩ খ্রিস্টাব্দে','১৮০০ খ্রিস্টাব্দে'],ans:1,exp:'কোম্পানির অত্যধিক রাজস্ব আদায় এবং ধর্মানুষ্ঠানে যোগ দেওয়ায় বাধা প্রদানের কারণে ১৭৬৩ খ্রিস্টাব্দে দাশনামি সন্ন্যাসী ও মাদারি ফকিরেরা প্রথম এই বিদ্রোহ শুরু করেছিলেন।'},
+        {q:'বঙ্কিমচন্দ্র চট্টোপাধ্যায়ের কোন্ উপন্যাসে সন্ন্যাসী-ফকির বিদ্রোহের পরিচয় পাওয়া যায়?',opts:['বিষবৃক্ষ','গোরা','আনন্দমঠ ও দেবী চৌধুরাণী','কপালকুণ্ডলা'],ans:2,exp:'বঙ্কিমচন্দ্র চট্টোপাধ্যায়ের বিখ্যাত দুটি উপন্যাস "আনন্দমঠ" ও "দেবী চৌধুরাণী"-তে এই সন্ন্যাসী ও ফকির বিদ্রোহের বিস্তৃত পরিচয় পাওয়া যায়।'},
+        {q:'সন্ন্যাসী-ফকির বিদ্রোহ প্রথম কোন্ অঞ্চলে শুরু হয়েছিল?',opts:['মেদিনীপুর','ঢাকা','বীরভূম','মালদহ'],ans:1,exp:'১৭৬৩ খ্রিস্টাব্দে ঢাকায় সর্বপ্রথম এই বিদ্রোহ শুরু হয়ে পরে তা ধীরে ধীরে কোচবিহার, রংপুর, মালদহ, দিনাজপুরসহ বিভিন্ন অঞ্চলে ছড়িয়ে পড়েছিল।'},
+        {q:'সন্ন্যাসী-ফকির বিদ্রোহের অন্যতম নেত্রী কে ছিলেন?',opts:['রানি শিরোমণি','দেবী চৌধুরাণী','প্রীতিলতা','মাতঙ্গিনী'],ans:1,exp:'ভবানী পাঠক, মজনু শাহ, মুশা শাহ প্রমুখের পাশাপাশি এই বিদ্রোহে নেতৃত্ব দানকারী অন্যতম নেত্রী ছিলেন দেবী চৌধুরাণী।'},
+        {q:'কোন্ ইংরেজ সেনাপতি ১৭৭২ খ্রিস্টাব্দে রংপুরের যুদ্ধে সন্ন্যাসী-ফকিরদের হাতে নিহত হন?',opts:['ক্যাপ্টেন রজার্স','ক্যাপ্টেন উইলকিনসন','ক্যাপ্টেন এডওয়ার্ডস','ক্যাপ্টেন টমাস'],ans:3,exp:'১৭৭২ খ্রিস্টাব্দে রংপুরের যুদ্ধে বিদ্রোহীরা অভূতপূর্ব সাফল্য লাভ করে এবং তাদের হাতে ইংরেজ সেনাপতি ক্যাপ্টেন টমাস নিহত হন।'},
+        {q:'কোন্ ইংরেজ সেনাপতি ১৭৭৩ খ্রিস্টাব্দে বিদ্রোহীদের হাতে নিহত হন?',opts:['ক্যাপ্টেন এডওয়ার্ডস','ক্যাপ্টেন রজার্স','মেজর উইলিয়ামস','কর্নেল আউট্রাম'],ans:0,exp:'ক্যাপ্টেন টমাসের মৃত্যুর পরের বছরই অর্থাৎ ১৭৭৩ খ্রিস্টাব্দে অপর একজন ইংরেজ সেনাপতি ক্যাপ্টেন এডওয়ার্ডসও সন্ন্যাসী-ফকির বিদ্রোহীদের হাতে নিহত হয়েছিলেন।'},
+        {q:'সন্ন্যাসী-ফকির বিদ্রোহ দমনে কোন্ ইংরেজ ম্যাজিস্ট্রেট সক্রিয় উদ্যোগ নিয়েছিলেন?',opts:['ম্যাজিস্ট্রেট কিংসফোর্ড','ম্যাজিস্ট্রেট হ্যামিলটন','জ্যাকসন','রজার্স'],ans:1,exp:'এই বিদ্রোহ কঠোর হাতে দমন করার জন্য লেফট্যান্যান্ট মরিসন এবং ইংরেজ ম্যাজিস্ট্রেট হ্যামিলটন সক্রিয় উদ্যোগ গ্রহণ করেছিলেন।'},
+        {q:'সন্ন্যাসী-ফকির বিদ্রোহকে "পেশাদার ডাকাতদের উপদ্রব" বলে কে মন্তব্য করেছেন?',opts:['লর্ড ডালহৌসি','ওয়ারেন হেস্টিংস','লর্ড উইলিয়াম বেন্টিঙ্ক','লর্ড কর্নওয়ালিস'],ans:1,exp:'তৎকালীন গভর্নর জেনারেল ওয়ারেন হেস্টিংস এই বিদ্রোহের রাজনৈতিক ও অর্থনৈতিক কারণগুলি অস্বীকার করে একে নিছক "পেশাদার ডাকাতদের উপদ্রব" বলে চিহ্নিত করেছিলেন।'},
+        {q:'সন্ন্যাসী-ফকির বিদ্রোহকে "কৃষক বিদ্রোহ" বলে কে আখ্যায়িত করেছেন?',opts:['ওয়ারেন হেস্টিংস','উইলিয়াম হান্টার','চার্লস মেটকাফ','জে. পি. গ্রান্ট'],ans:1,exp:'প্রকৃতিগত বিচারে এটি ব্রিটিশ বিরোধী কৃষক আন্দোলন হওয়ায় উইলিয়াম হান্টার, এডওয়ার্ড ও গ্যারাট প্রমুখ একে "কৃষক বিদ্রোহ" বলে আখ্যায়িত করেছেন।'},
+        {q:'ভারতে ইংরেজ শাসনের বিরুদ্ধে সংঘটিত প্রথম সশস্ত্র কৃষক বিদ্রোহ কোনটি?',opts:['কোল বিদ্রোহ','চুয়াড় বিদ্রোহ','সন্ন্যাসী-ফকির বিদ্রোহ','নীল বিদ্রোহ'],ans:2,exp:'ব্রিটিশ বিরোধী কৃষক সংগ্রামের ইতিহাসে সন্ন্যাসী-ফকির বিদ্রোহ ছিল ভারতে ইংরেজ শাসনের বিরুদ্ধে সংঘটিত হওয়া প্রথম সশস্ত্র কৃষক বিদ্রোহ।'},
+        {q:'পাগলপন্থীদের বিদ্রোহ মূলত কোন্ অঞ্চলে সংঘটিত হয়েছিল?',opts:['মেদিনীপুরের জঙ্গলমহলে','ছোটোনাগপুরে','ময়মনসিংহ জেলার শেরপুর পরগনায়','রাজমহল পাহাড়ে'],ans:2,exp:'পূর্ববঙ্গের ময়মনসিংহ জেলার শেরপুর পরগনাতে গারো, হাজং ও হাড়িদের মতো উপজাতি সম্প্রদায়ের মানুষরা পাগলপন্থী ধর্মে দীক্ষিত হয়ে এই বিদ্রোহ সংঘটিত করেছিল।'},
+        {q:'পাগলপন্থী সম্প্রদায়ের প্রতিষ্ঠা কে করেন?',opts:['করম শাহ','টিপু শাহ','মজনু শাহ','মুশা শাহ'],ans:0,exp:'শেরপুর পরগনার বাউল বা পাগলপন্থী ধর্মের প্রতিষ্ঠা করেছিলেন করম শাহ, যিনি সাম্যবাদী আদর্শে মানুষকে অনুপ্রাণিত করেছিলেন।'},
+        {q:'পাগলপন্থী বিদ্রোহে করম শাহের পর কে নেতৃত্ব দেন?',opts:['মজনু শাহ','টিপু শাহ','চিরাগ আলি শাহ','মুশা শাহ'],ans:1,exp:'করম শাহের মৃত্যুর পর তাঁর পুত্র টিপু শাহ পাগলপন্থী সম্প্রদায়ের দায়িত্ব নেন এবং খাজনা বৃদ্ধির প্রতিবাদে তীব্র আন্দোলনের নেতৃত্ব দেন।'},
+        {q:'পাগলপন্থী বিদ্রোহ মূলত কাদের বিরুদ্ধে পরিচালিত হয়েছিল?',opts:['সন্ন্যাসীদের বিরুদ্ধে','মারাঠাদের বিরুদ্ধে','জমিদার ও ব্রিটিশ সরকারের বিরুদ্ধে','ফরাসিদের বিরুদ্ধে'],ans:2,exp:'ড. বিনয়ভূষণ চৌধুরীর মতে, উচ্চহারে খাজনা আদায়ের কারণে এই আন্দোলন পরবর্তীকালে জমিদার ও ব্রিটিশ সরকার বিরোধী হয়ে উঠেছিল।'},
+        {q:'সন্ন্যাসী-ফকির বিদ্রোহে কোন্ সম্প্রদায়ের মানুষ অংশগ্রহণ করেছিল?',opts:['কেবল হিন্দুরা','কেবল মুসলিমরা','হিন্দু ও মুসলিম উভয় সম্প্রদায়','কেবল আদিবাসীরা'],ans:2,exp:'সন্ন্যাসী ও ফকিরদের ওপর কোম্পানির কর্মচারীদের অত্যাচারের বিরোধিতা করতে হিন্দু ও মুসলিম সম্প্রদায়ের মানুষ সম্মিলিতভাবে এই বিদ্রোহে শামিল হয়েছিল।'}
+    ]
+},{
+    id:6, title:'সেট ৬', subtitle:'বাংলায় ওয়াহাবি আন্দোলন বা বারাসত বিদ্রোহ (টপিক ৩.২)',
+    questions:[
+        {q:'"ওয়াহাবি" শব্দের অর্থ কী?',opts:['নবজাগরণ','স্বাধীনতা','পবিত্রভূমি','ধর্মযুদ্ধ'],ans:0,exp:'আরব দেশে মোহম্মদ-বিন আব্দুল ওয়াহাব দ্বারা সূচিত "ওয়াহাবি" শব্দের শাব্দিক অর্থ হলো "নবজাগরণ"।'},
+        {q:'ভারতে ওয়াহাবি আন্দোলনের প্রকৃত প্রতিষ্ঠাতা কে ছিলেন?',opts:['শাহ ওয়ালিউল্লাহ','তিতুমির','সৈয়দ আহমেদ ব্রেলভি','মোহম্মদ-বিন-আব্দুল ওয়াহাব'],ans:2,exp:'ভারতে এই আন্দোলনের সূত্রপাত শাহ ওয়ালিউল্লাহ করলেও, এর প্রকৃত প্রতিষ্ঠাতা ছিলেন উত্তরপ্রদেশের রায়বেরিলির সৈয়দ আহমেদ ব্রেলভি।'},
+        {q:'বাংলায় ওয়াহাবি আন্দোলনের নেতৃত্ব কে দেন?',opts:['সৈয়দ আহমেদ ব্রেলভি','তিতুমির','দুদু মিঞা','হাজি শরিয়ৎউল্লাহ'],ans:1,exp:'সৈয়দ আহমেদ ব্রেলভির দ্বারা অনুপ্রাণিত হয়ে তিতুমির বাংলায় ওয়াহাবি আন্দোলনের ডাক দিয়েছিলেন।'},
+        {q:'তিতুমিরের প্রকৃত নাম কী?',opts:['মির নিশার আলি','মোহম্মদ মহসিন','চিরাগ আলি','গোলাম মাসুম'],ans:0,exp:'বাংলার ওয়াহাবি আন্দোলনের প্রাণপুরুষ তিতুমিরের প্রকৃত নাম ছিল মির নিশার আলি।'},
+        {q:'তিতুমির তাঁর আন্দোলনের প্রধান কেন্দ্র কোথায় স্থাপন করেছিলেন?',opts:['বারাসতে','নারকেলবেড়িয়া গ্রামে','পুঁড়ায়','বসিরহাটে'],ans:1,exp:'তিতুমির চব্বিশ পরগনার বাদুড়িয়া থানার অন্তর্ভুক্ত নারকেলবেড়িয়া গ্রামে বাঁশের কেল্লা নির্মাণ করে তাঁর আন্দোলনের প্রধান কেন্দ্র স্থাপন করেছিলেন।'},
+        {q:'তিতুমিরের প্রধানমন্ত্রী কে ছিলেন?',opts:['গোলাম মাসুম','মৈনুদ্দিন','সৈয়দ আহমেদ','নোয়া মিঞা'],ans:1,exp:'তিতুমিরের অসাধারণ সাংগঠনিক শক্তিতে গড়ে ওঠা বাহিনীর প্রধানমন্ত্রী হিসেবে দায়িত্ব পালন করতেন মৈনুদ্দিন।'},
+        {q:'তিতুমিরের বাহিনীর সেনাপতি কে ছিলেন?',opts:['মৈনুদ্দিন','রফিক মণ্ডল','গোলাম মাসুম','কাদের মোল্লা'],ans:2,exp:'তিতুমিরের গড়ে তোলা বাহিনীর সেনাপতি পদে নিযুক্ত ছিলেন তাঁর বিশ্বস্ত অনুচর গোলাম মাসুম।'},
+        {q:'১৮৩০ খ্রিস্টাব্দের ৬ নভেম্বর তিতুমির কোন্ জমিদারের বিরুদ্ধে আক্রমণ শানিয়েছিলেন?',opts:['নড়াইলের জমিদার রামরতন মল্লিক','পুঁড়ার জমিদার কৃষ্ণদেব রায়','ঘাটশিলার জমিদার জগন্নাথ সিংহ','মেদিনীপুরের জমিদার'],ans:1,exp:'১৮৩০ খ্রিস্টাব্দের ৬ নভেম্বর তিতুমির তাঁর প্রায় ৩০০ অনুগামী নিয়ে পুঁড়ার জমিদার কৃষ্ণদেব রায়ের ওপর আক্রমণ চালিয়েছিলেন।'},
+        {q:'তিতুমির ইংরেজ রাজত্বের অবসানকল্পে নিজেকে কী বলে ঘোষণা করেছিলেন?',opts:['নবাব','সম্রাট','বাদশাহ','খলিফা'],ans:2,exp:'ইংরেজ রাজত্বের অবসানকল্পে এবং নিজস্ব শাসন প্রতিষ্ঠার জন্য তিতুমির নিজেকে "বাদশাহ" বলে ঘোষণা করেছিলেন।'},
+        {q:'তিতুমিরের বাঁশের কেল্লা ধ্বংস করার জন্য কে সামরিক অভিযান প্রেরণ করেন?',opts:['লর্ড ডালহৌসি','লর্ড উইলিয়াম বেন্টিঙ্ক','লর্ড ক্যানিং','লর্ড ওয়েলেসলি'],ans:1,exp:'তিতুমিরের আন্দোলন প্রবল আকার ধারণ করলে ১৮৩১ খ্রিস্টাব্দে বড়োলাট লর্ড উইলিয়াম বেন্টিঙ্ক একটি শক্তিশালী অভিযান প্রেরণ করেছিলেন, যার কামানের গোলায় বাঁশের কেল্লা ধ্বংস হয়।'},
+        {q:'বাংলার ওয়াহাবি আন্দোলন ইতিহাসে কী নামে পরিচিত?',opts:['ফরাজি বিদ্রোহ','পাগলপন্থী বিদ্রোহ','বারাসত বিদ্রোহ','চুয়াড় বিদ্রোহ'],ans:2,exp:'তিতুমিরের এই আন্দোলনের প্রধান কেন্দ্র বারাসত মহকুমায় অবস্থিত হওয়ায় ইতিহাসে এটি "বারাসত বিদ্রোহ" নামে পরিচিত।'},
+        {q:'তিতুমির বাংলায় যে ওয়াহাবি আন্দোলনের সূত্রপাত করেছিলেন তার নিজস্ব নাম কী ছিল?',opts:['তরিকা-ই-মহম্মদীয়া','ফরাজি','হেদায়েতী','পাগলপন্থী'],ans:0,exp:'অধ্যাপক গৌতম ভদ্রের মতে, তিতুমির বাংলায় যে ওয়াহাবি আন্দোলনের সূত্রপাত করেছিলেন তার আসল নাম ছিল "তরিকা-ই-মহম্মদীয়া"।'},
+        {q:'"তরিকা-ই-মহম্মদীয়া" কথার অর্থ কী?',opts:['নবজাগরণ','আল্লার পথ','মহম্মদের পথ','পবিত্র পথ'],ans:2,exp:'"তরিকা-ই-মহম্মদীয়া" একটি আরবি শব্দবন্ধ, যার অর্থ হলো মহম্মদের নির্দেশিত পথ।'},
+        {q:'বারাসত বিদ্রোহকে "অন্ধ মুসলিম জেহাদ" বলে কে মন্তব্য করেছেন?',opts:['নরহরি কবিরাজ','রমেশচন্দ্র মজুমদার','ড. অভিজিৎ দত্ত','রণজিৎ গুহ'],ans:2,exp:'তিতুমিরের আন্দোলন মূল ওয়াহাবি আদর্শ থেকে পথভ্রষ্ট হয়েছিল দাবি করে ঐতিহাসিক ড. অভিজিৎ দত্ত একে "অন্ধ মুসলিম জেহাদ" বলেছিলেন।'},
+        {q:'কোন্ ঐতিহাসিক বাংলার ওয়াহাবি আন্দোলনকে "নিম্নবর্গের মানুষের মর্যাদা রক্ষার রাজনৈতিক লড়াই" বলেছেন?',opts:['রণজিৎ গুহ','গৌতম ভদ্র','নরহরি কবিরাজ','রমেশচন্দ্র মজুমদার'],ans:0,exp:'নিম্নবর্গীয় ঐতিহাসিক অধ্যাপক রণজিৎ গুহ মনে করেন যে, ওয়াহাবি আন্দোলন ছিল নিম্নবর্গের মানুষের মর্যাদা রক্ষার জন্য একটি রাজনৈতিক লড়াই।'}
+    ]
+},{
+    id:7, title:'সেট ৭', subtitle:'ফরাজি আন্দোলন (টপিক ৩.২)',
+    questions:[
+        {q:'"ফরাজি" শব্দের অর্থ কী?',opts:['মহম্মদের পথ','ইসলাম নির্দিষ্ট বাধ্যতামূলক কর্তব্য','নবজাগরণ','পবিত্র ভূমি'],ans:1,exp:'আরবি শব্দ "ফরাইজ" থেকে "ফরাজি" শব্দটির উৎপত্তি, যার অর্থ হলো "ইসলাম নির্দিষ্ট বাধ্যতামূলক কর্তব্য"।'},
+        {q:'ফরাজি আন্দোলনের প্রবর্তক কে ছিলেন?',opts:['তিতুমির','সৈয়দ আহমেদ ব্রেলভি','হাজি শরিয়ৎউল্লাহ','দুদু মিঞা'],ans:2,exp:'বর্তমান বাংলাদেশের ফরিদপুরে কৃষি অসন্তোষ ও ধর্মীয় প্রভাবের মিশ্রণে হাজি শরিয়ৎউল্লাহ এই ফরাজি আন্দোলনের সূত্রপাত করেছিলেন।'},
+        {q:'ফরাজি সম্প্রদায় কবে প্রতিষ্ঠিত হয়?',opts:['১৮১৮ খ্রিস্টাব্দে','১৮২০ খ্রিস্টাব্দে','১৮৩১ খ্রিস্টাব্দে','১৮৩৭ খ্রিস্টাব্দে'],ans:1,exp:'১৮১৮ খ্রিস্টাব্দে বিদেশ থেকে ফিরে এসে ইসলামের শুদ্ধিকরণে আত্মনিয়োগ করে হাজি শরিয়ৎউল্লাহ ১৮২০ খ্রিস্টাব্দে "ফরাজি" নামে এই ধর্মীয় সম্প্রদায়ের জন্ম দেন।'},
+        {q:'ফরাজি আন্দোলন মূলত কোন্ অঞ্চলে গড়ে উঠেছিল?',opts:['বারাসত অঞ্চলে','ফরিদপুর ও তার পার্শ্ববর্তী অঞ্চলে','ময়মনসিংহ অঞ্চলে','মেদিনীপুর অঞ্চলে'],ans:1,exp:'১৭৮১ খ্রিস্টাব্দে বর্তমান বাংলাদেশের ফরিদপুর জেলার বাহাদুরপুর গ্রামে জন্মগ্রহণকারী হাজি শরিয়ৎউল্লাহের ফরাজি আন্দোলনের মূল কেন্দ্র ছিল ফরিদপুর অঞ্চল।'},
+        {q:'"আল্লা হলেন জমির মালিক"—এই কথাটি কে ঘোষণা করেছিলেন?',opts:['হাজি শরিয়ৎউল্লাহ','নোয়া মিঞা','মোহম্মদ মহসিন বা দুদু মিঞা','তিতুমির'],ans:2,exp:'মোহম্মদ মহসিন বা দুদু মিঞা ফরাজি আন্দোলনের দায়িত্ব নিয়ে ঘোষণা করেন যে আল্লা হলেন জমির মালিক, তাই জমির ওপর খাজনা ধার্য করার অধিকার জমিদারদের নেই।'},
+        {q:'দুদু মিঞার প্রকৃত নাম কী ছিল?',opts:['মির নিশার আলি','মোহম্মদ মহসিন','চিরাগ আলি','মৈনুদ্দিন'],ans:1,exp:'হাজি শরিয়ৎউল্লাহের পুত্র এবং ফরাজি আন্দোলনের অন্যতম শ্রেষ্ঠ সংগঠক দুদু মিঞার প্রকৃত নাম ছিল মোহম্মদ মহসিন।'},
+        {q:'দুদু মিঞা তাঁর অনুগামীদের কিসে ভাগ করেছিলেন?',opts:['হালকা বা হল্কা','জেলা','পরগনা','সুবা'],ans:0,exp:'অসাধারণ সংগঠক মোহম্মদ মহসিন ফরাজি আন্দোলনে প্রভাবিত গোটা বাংলাকে কয়েকটি "হল্কা"-য় বিভাজিত করে প্রতিটিতে একজন করে খলিফা নিযুক্ত করেছিলেন।'},
+        {q:'ফরাজি আন্দোলনের মূল কেন্দ্র কোথায় ছিল?',opts:['নারকেলবেড়িয়া','ঢাকা','বাহাদুরপুর','বারাসত'],ans:2,exp:'হাজি শরিয়ৎউল্লাহের জন্মস্থান বাহাদুরপুর গ্রামই ছিল ফরাজি আন্দোলনের মূল কেন্দ্র, যেখান থেকে এটি অন্যান্য জেলায় ছড়িয়ে পড়ে।'},
+        {q:'দুদু মিঞার মৃত্যুর পর ফরাজি আন্দোলনের নেতৃত্ব কে গ্রহণ করেন?',opts:['তিতুমির','নোয়া মিঞা','গোলাম মাসুম','রফিক মণ্ডল'],ans:1,exp:'১৮৬২ খ্রিস্টাব্দে মোহম্মদ মহসিন বা দুদু মিঞার মৃত্যুর পর তাঁর পুত্র নোয়া মিঞা এই আন্দোলনের নেতৃত্ব গ্রহণ করেছিলেন।'},
+        {q:'ফরাজিদের বিকল্প সরকার ও আদালত স্থাপনের পদক্ষেপ আন্দোলনটিকে কীরূপ রূপ দিয়েছিল?',opts:['অহিংস রূপ','বৈপ্লবিক রূপ','সাংবিধানিক রূপ','আপসমূলক রূপ'],ans:1,exp:'বিকল্প সরকার, শাসন ও আদালত স্থাপন এবং সেনাবাহিনী গঠনের মতো পদক্ষেপগুলি ফরাজি আন্দোলনকে একটি বৈপ্লবিক রূপ দিয়েছিল, যা পরবর্তী কৃষক আন্দোলনগুলিকে প্রভাবিত করেছিল।'},
+        {q:'ফরাজি আন্দোলনকে "সাম্যবাদী প্রজাতান্ত্রিক আন্দোলন" বলে কে চিহ্নিত করেছেন?',opts:['সুপ্রকাশ রায়','উইলিয়াম হান্টার','নরহরি কবিরাজ','রমেশচন্দ্র মজুমদার'],ans:1,exp:'ঐতিহাসিক উইলিয়াম হান্টার এই আন্দোলনের মধ্যে শ্রেণিসংগ্রামের বীজ লক্ষ করে একে "সাম্যবাদী প্রজাতান্ত্রিক আন্দোলন" বলে চিহ্নিত করেছেন।'},
+        {q:'শরিয়ৎউল্লাহ ভারতকে কীসে পরিণত করার ডাক দিয়েছিলেন?',opts:['দার-উল-হারব','দার-উল-ইসলাম','তরিকা-ই-মহম্মদীয়া','হিন্দু রাষ্ট্র'],ans:1,exp:'হাজি শরিয়ৎউল্লাহ ভারতবর্ষকে "দার-উল-ইসলাম" বা "ইসলামের দেশে"-এ পরিণত করার জন্য ডাক দিয়েছিলেন।'},
+        {q:'শরিয়ৎউল্লাহ ভারতবর্ষকে কী বলে মনে করতেন?',opts:['স্বাধীন দেশ','পবিত্র দেশ','দার-উল-হারব বা বিধর্মীর দেশ','দার-উল-ইসলাম'],ans:2,exp:'ব্রিটিশ শাসিত ভারতবর্ষকে শরিয়ৎউল্লাহ "দার-উল-হারব" বা "বিধর্মীর দেশ" বলে মনে করতেন এবং এখান থেকেই তিনি আন্দোলনের রূপরেখা তৈরি করেন।'},
+        {q:'ফরাজি আন্দোলনকে কারা ধর্মীয় আন্দোলনের গণ্ডি পার করিয়ে কৃষক আন্দোলনের রূপ দিয়েছিলেন?',opts:['হাজি শরিয়ৎউল্লাহ','মোহম্মদ মহসিন বা দুদু মিঞা','তিতুমির','নোয়া মিঞা'],ans:1,exp:'শরিয়ৎউল্লাহের আমলে এটি ধর্মীয় উদ্দেশ্যে পরিচালিত হলেও তাঁর পুত্র মোহম্মদ মহসিনের সময় এই আন্দোলন ধর্মের গণ্ডি পেরিয়ে কৃষক আন্দোলনের রূপ পেয়েছিল।'},
+        {q:'কোন্ ঐতিহাসিক বলেছেন, "দুদু মিঞা জমিদার ও নীলকরদের বিরুদ্ধে দরিদ্র নিপীড়িত কৃষকদের ঐক্যবদ্ধ করে তাদের নতুন চেতনায় উদ্‌বুদ্ধ করেছিলেন"?',opts:['উইলিয়াম হান্টার','শশীভূষণ চৌধুরী','নরহরি কবিরাজ','অভিজিৎ দত্ত'],ans:2,exp:'ফরাজি আন্দোলন বিশ্লেষণ করতে গিয়ে অধ্যাপক নরহরি কবিরাজ দুদু মিঞার কৃষক ঐক্যের বিষয়ে এই বিখ্যাত মন্তব্যটি করেছেন।'}
+    ]
+},{
+    id:8, title:'সেট ৮', subtitle:'নীল বিদ্রোহ ও পাবনার কৃষক বিদ্রোহ (টপিক ৩.৩)',
+    questions:[
+        {q:'বাংলায় নীল বিদ্রোহ কবে সংঘটিত হয়?',opts:['১৮৫৫-৫৬ খ্রিস্টাব্দে','১৮৫৯-৬০ খ্রিস্টাব্দে','১৮৭০-৭১ খ্রিস্টাব্দে','১৮৮৬ খ্রিস্টাব্দে'],ans:1,exp:'ব্রিটিশ নীলকরদের বিরুদ্ধে বাংলার কৃষকদের পুঞ্জীভূত ক্ষোভের বহিঃপ্রকাশ হিসেবে ১৮৫৯-৬০ খ্রিস্টাব্দে নীল বিদ্রোহ সংঘটিত হয়েছিল।'},
+        {q:'ভারতে প্রথম নীলের চাষ কে শুরু করেন?',opts:['ক্যারল ব্লুম','জেমস লং','লুই বোনো বা লুই মেনার্ড','পিটার গ্রান্ট'],ans:2,exp:'লুই বোনো বা লুই মেনার্ড নামে জনৈক ফরাসি বণিক সর্বপ্রথম ভারতে নীলের চাষ শুরু করেছিলেন।'},
+        {q:'নীলকররা কৃষকদের অগ্রিম টাকা দিয়ে যে চাষ করাত, তাকে কী বলা হতো?',opts:['এলাকা চাষ','নিজআবাদি চাষ','বে-এলাকা বা দাদনি চাষ','খুৎকাঠি চাষ'],ans:2,exp:'নীলকর সাহেবরা চাষিদের বিঘা প্রতি ২ টাকা দাদন বা অগ্রিম টাকা দিয়ে চাষির জমিতে নীলচাষ করাত, যা বে-এলাকা বা দাদনি বা রায়তি চাষ নামে পরিচিত ছিল।'},
+        {q:'১৮৩০ খ্রিস্টাব্দের কোন্ আইন দ্বারা নীলকররা নীলচাষ না করলে চাষিদের অভিযুক্ত করতে পারত?',opts:['পঞ্চম আইন (Regulation V)','সপ্তম আইন','অষ্টম আইন','দশম আইন'],ans:0,exp:'১৮৩০ খ্রিস্টাব্দের পঞ্চম আইন বা Regulation V-এর দ্বারা নীলকরদের এই অধিকার দেওয়া হয়েছিল যে নীলচাষে অবাধ্য হলে তারা চাষিদের অভিযুক্ত করতে পারবে।'},
+        {q:'নীল বিদ্রোহের সূচনা কোথায় হয়েছিল?',opts:['পাবনা জেলায়','নদীয়া জেলার চৌগাছা গ্রামে','মালদহে','খুলনায়'],ans:1,exp:'নদিয়ার চৌগাছা গ্রামের দুই ভাই কৃষকদের সংগঠিত করে সর্বপ্রথম নীল বিদ্রোহের সূচনা করেছিলেন।'},
+        {q:'নীল বিদ্রোহের প্রধান দুই নেতা কে কে ছিলেন?',opts:['সিধু ও কানহু','বিষ্ণুচরণ বিশ্বাস ও দিগম্বর বিশ্বাস','রামরতন মল্লিক ও রফিক মণ্ডল','ঈশানচন্দ্র রায় ও শম্ভুনাথ পাল'],ans:1,exp:'নদিয়ার চৌগাছা গ্রামের বিষ্ণুচরণ বিশ্বাস ও দিগম্বর বিশ্বাস কৃষকদের সংগঠিত করে নীল বিদ্রোহের প্রধান নেতৃত্ব প্রদান করেছিলেন।'},
+        {q:'"বাংলার ওয়াট টাইলার" কাদের বলা হয়?',opts:['বিষ্ণুচরণ ও দিগম্বর বিশ্বাসকে','সিধু ও কানহুকে','তিতুমির ও দুদু মিঞাকে','বৈদ্যনাথ ও বিশ্বনাথ সর্দারকে'],ans:0,exp:'ইংল্যান্ডের প্রখ্যাত কৃষক বিদ্রোহের নেতার অনুকরণে বিষ্ণুচরণ ও দিগম্বর বিশ্বাসকে "বাংলার ওয়াট টাইলার" বলে অভিহিত করা হয়।'},
+        {q:'নীল বিদ্রোহে "বাংলার নানাসাহেব" নামে কে পরিচিত ছিলেন?',opts:['হরিশচন্দ্র মুখোপাধ্যায়','রফিক মণ্ডল','রামরতন মল্লিক','ঈশানচন্দ্র রায়'],ans:2,exp:'নীল বিদ্রোহে অত্যন্ত সক্রিয় ভূমিকা নেওয়ার জন্য নড়াইলের জমিদার রামরতন মল্লিককে "বাংলার নানাসাহেব" বলে অভিহিত করা হয়।'},
+        {q:'১৮৬০ খ্রিস্টাব্দে গঠিত "নীল কমিশন"-এর সভাপতি কে ছিলেন?',opts:['লর্ড ক্যানিং','লর্ড ডালহৌসি','রেভারেন্ড জেমস লং','জে. পি. গ্রান্ট'],ans:3,exp:'নীল বিদ্রোহের পরিপ্রেক্ষিতে ১৮৬০ খ্রিস্টাব্দের ৩১ ডিসেম্বর ৫ জন সদস্যকে নিয়ে জে. পি. গ্রান্টের নেতৃত্বে নীল তদন্ত কমিশন গঠিত হয়েছিল।'},
+        {q:'কবে "নীল চুক্তি আইন" রদ করা হয়?',opts:['১৮৫৯ খ্রিস্টাব্দে','১৮৬০ খ্রিস্টাব্দে','১৮৬৮ খ্রিস্টাব্দে','১৮৯২ খ্রিস্টাব্দে'],ans:2,exp:'নীল কমিশনের সুপারিশ অনুযায়ী ১৮৬৮ খ্রিস্টাব্দে অষ্টম আইন দ্বারা জোরপূর্বক "নীল চুক্তি আইন" রদ করা হয়।'},
+        {q:'"নীল বিদ্রোহই সর্বপ্রথম ভারতবাসীকে সংঘবদ্ধ রাজনৈতিক আন্দোলনের প্রয়োজনীয়তা শিখিয়েছিল"—উক্তিটি কার?',opts:['শিশির কুমার ঘোষ','বঙ্কিমচন্দ্র চট্টোপাধ্যায়','হরিশচন্দ্র মুখোপাধ্যায়','ঈশ্বরচন্দ্র গুপ্ত'],ans:0,exp:'বাঙালি জাতীয়তাবাদ প্রসারে নীল বিদ্রোহের সাফল্য উল্লেখ করতে গিয়ে প্রখ্যাত সাংবাদিক শিশির কুমার ঘোষ এই মন্তব্যটি করেছিলেন।'},
+        {q:'বাংলার কোন্ সাংবাদিককে প্রথম "ফিল্ড জার্নালিস্ট" বলা হয়?',opts:['হরিশচন্দ্র মুখোপাধ্যায়','শিশির কুমার ঘোষ','দ্বারকানাথ বিদ্যাভূষণ','কাঙাল হরিনাথ'],ans:1,exp:'শিশির কুমার ঘোষ "M.L.L." ছদ্মনামে বিভিন্ন গ্রামে ঘুরে কৃষকদের খবর সংগ্রহ করে হিন্দু প্যাট্রিয়ট পত্রিকায় ছাপতেন বলে তাঁকে বাংলার প্রথম "ফিল্ড জার্নালিস্ট" বলা হয়।'},
+        {q:'পাবনার কৃষক বিদ্রোহ কবে সংঘটিত হয়?',opts:['১৮৫৯ খ্রিস্টাব্দে','১৮৬০ খ্রিস্টাব্দে','১৮৭০-এর দশকে','১৮৯২ খ্রিস্টাব্দে'],ans:2,exp:'বর্তমান বাংলাদেশে কৃষকদের জমির দখলি স্বত্বাধিকার নষ্ট করার প্রতিবাদে ১৮৭০-এর দশকে (বিশেষত ১৮৭৩ খ্রি.) পাবনার কৃষক বিদ্রোহ সংঘটিত হয়েছিল।'},
+        {q:'পাবনা বিদ্রোহে "বিদ্রোহী রাজা" কাকে বলা হতো?',opts:['ঈশানচন্দ্র রায়','শম্ভুনাথ পাল','ক্ষুদি মোল্লা','রফিক মণ্ডল'],ans:0,exp:'পাবনার কৃষক আন্দোলনে নেতৃত্ব প্রদানকারী এক সম্পন্ন কৃষক ঈশানচন্দ্র রায়কে স্থানীয়ভাবে "বিদ্রোহী রাজা" বলা হতো।'},
+        {q:'কোন্ কৃষক বিদ্রোহের ফলে ১৮৮৬ খ্রিস্টাব্দে "বঙ্গীয় প্রজাস্বত্ব আইন" পাস হয়?',opts:['নীল বিদ্রোহ','ফরাজি আন্দোলন','পাবনার কৃষক বিদ্রোহ','ওয়াহাবি আন্দোলন'],ans:2,exp:'পাবনার কৃষক বিদ্রোহ এবং "অ্যাগ্রারিয়ান লিগ"-এর দীর্ঘ আন্দোলনের পরিণতিতেই ব্রিটিশ সরকার ১৮৮৬ খ্রিস্টাব্দে "বঙ্গীয় প্রজাস্বত্ব আইন" পাস করতে বাধ্য হয়েছিল।'}
+    ]
+}];
+
+// ============================================================
+// LOGIN LOGIC
+// ============================================================
+const loginScreen = document.getElementById('screen-login');
+const loginUsername = document.getElementById('login-username');
+const loginPassword = document.getElementById('login-password');
+const loginBtn = document.getElementById('login-btn');
+const loginError = document.getElementById('login-error');
+
+function doLogin() {
+    const user = loginUsername.value.trim();
+    const pass = loginPassword.value.trim();
+    if (VALID_USERS[user] && VALID_USERS[user] === pass) {
+        loggedInUser = user;
+        loginError.classList.remove('show');
+        loginScreen.style.display = 'none';
+        document.getElementById('screen-start').style.display = 'block';
+        document.getElementById('logged-username').textContent = user;
+        document.getElementById('uname').value = user;
+        if (document.querySelectorAll('#set-grid .set-chip').length === 0) buildSetChips();
+    } else {
+        loginError.classList.add('show');
+        loginPassword.value = '';
+        loginPassword.focus();
+    }
+}
+loginBtn.addEventListener('click', doLogin);
+loginUsername.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+loginPassword.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    loggedInUser = null;
+    document.getElementById('screen-start').style.display = 'none';
+    loginScreen.style.display = 'block';
+    loginUsername.value = '';
+    loginPassword.value = '';
+    loginError.classList.remove('show');
+});
+
+// ============================================================
+// QUIZ STATE
+// ============================================================
+const state = {
+    username: '',
+    setIndex: 0,
+    qIndex: 0,
+    score: 0,
+    wrong: 0,
+    selected: null,
+    answered: false,
+    startTime: null,
+    totalElapsed: 0,
+    timerInterval: null,
+    timeLeft: 30,
+    perQ: 30,
+    history: [],
+    quizStart: null
+};
+
+const screenStart = document.getElementById('screen-start');
+const screenQuiz = document.getElementById('screen-quiz');
+const screenResult = document.getElementById('screen-result');
+const setGrid = document.getElementById('set-grid');
+const unameInput = document.getElementById('uname');
+const unameHint = document.getElementById('uname-hint');
+const startBtn = document.getElementById('start-btn');
+
+function buildSetChips() {
+    setGrid.innerHTML = '';
+    QUIZ_SETS.forEach((s, idx) => {
+        const chip = document.createElement('div');
+        chip.className = 'set-chip' + (idx === 0 ? ' active' : '');
+        chip.innerHTML = `<span class="n">${s.title.replace('সেট ','')}</span>${s.subtitle}`;
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('#set-grid .set-chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            state.setIndex = idx;
+        });
+        setGrid.appendChild(chip);
+    });
+}
+buildSetChips();
+
+unameInput.addEventListener('input', () => unameHint.textContent = '');
+
+startBtn.addEventListener('click', function() {
+    let name = unameInput.value.trim();
+    if (!name) {
+        unameHint.textContent = 'অনুগ্রহ করে নাম লেখো।';
+        unameInput.focus();
+        return;
+    }
+    state.username = name;
+    state.qIndex = 0;
+    state.score = 0;
+    state.wrong = 0;
+    state.totalElapsed = 0;
+    state.history = [];
+    beginQuiz();
+});
+
+function currentSet() { return QUIZ_SETS[state.setIndex]; }
+function currentQ() { return currentSet().questions[state.qIndex]; }
+
+function beginQuiz() {
+    screenStart.style.display = 'none';
+    screenResult.style.display = 'none';
+    screenQuiz.style.display = 'block';
+    document.getElementById('who-name').textContent = state.username;
+    document.getElementById('avatar-init').textContent = state.username.trim()[0].toUpperCase();
+    document.getElementById('who-set').textContent = currentSet().title + ' · ' + currentSet().subtitle;
+    state.quizStart = Date.now();
+    buildDots();
+    loadQuestion();
+}
+
+function buildDots() {
+    const wrap = document.getElementById('qdots');
+    wrap.innerHTML = '';
+    currentSet().questions.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'dot';
+        d.id = 'dot-' + i;
+        wrap.appendChild(d);
+    });
+}
+
+function updateDots() {
+    currentSet().questions.forEach((_, i) => {
+        const d = document.getElementById('dot-' + i);
+        if (!d) return;
+        d.className = 'dot';
+        if (i === state.qIndex) d.classList.add('current');
+        const rec = state.history[i];
+        if (rec) {
+            d.classList.add(rec.correct ? 'answered-correct' : 'answered-wrong');
+            if (i === state.qIndex) d.classList.add('current');
+        }
+    });
+}
+
+function loadQuestion() {
+    state.selected = null;
+    state.answered = false;
+    const q = currentQ();
+    const total = currentSet().questions.length;
+    document.getElementById('qnum-tag').textContent = 'প্রশ্ন ' + (state.qIndex + 1);
+    document.getElementById('qtext').textContent = q.q;
+    document.getElementById('progress-label').textContent = 'প্রশ্ন ' + (state.qIndex + 1) + ' / ' + total;
+    document.getElementById('score-label').textContent = 'স্কোর: ' + state.score;
+    document.getElementById('progress-fill').style.width = ((state.qIndex) / total * 100) + '%';
+    const optWrap = document.getElementById('options');
+    optWrap.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+    q.opts.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'opt';
+        div.innerHTML = `<span class="letter">${letters[i]}</span><span>${opt}</span>`;
+        div.addEventListener('click', () => selectOption(i));
+        optWrap.appendChild(div);
+    });
+    document.getElementById('explain').classList.remove('show');
+    document.getElementById('explain').innerHTML = '';
+    document.getElementById('next-btn').disabled = true;
+    document.getElementById('next-label').textContent = (state.qIndex === total - 1) ? 'ফলাফল দেখো' : 'পরের প্রশ্ন';
+    updateDots();
+    startTimer();
+}
+
+function startTimer() {
+    clearInterval(state.timerInterval);
+    state.timeLeft = state.perQ;
+    state.startTime = Date.now();
+    updateTimerDisplay();
+    const timerBox = document.getElementById('timer-box');
+    timerBox.classList.remove('warn', 'pulse');
+    state.timerInterval = setInterval(() => {
+        state.timeLeft -= 1;
+        updateTimerDisplay();
+        if (state.timeLeft <= 10) timerBox.classList.add('warn');
+        if (state.timeLeft <= 5) timerBox.classList.add('pulse');
+        if (state.timeLeft <= 0) {
+            clearInterval(state.timerInterval);
+            if (!state.answered) timeUp();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(Math.max(state.timeLeft, 0) / 60).toString().padStart(2, '0');
+    const s = Math.max(state.timeLeft, 0) % 60;
+    document.getElementById('timer-text').textContent = m + ':' + s.toString().padStart(2, '0');
+}
+
+function timeUp() {
+    state.answered = true;
+    revealAnswer(-1);
+    state.history[state.qIndex] = { q: currentQ().q, selected: -1, correct: false, correctIdx: currentQ().ans };
+    state.wrong++;
+    document.getElementById('next-btn').disabled = false;
+    updateDots();
+}
+
+function selectOption(i) {
+    if (state.answered) return;
+    state.answered = true;
+    clearInterval(state.timerInterval);
+    state.selected = i;
+    const q = currentQ();
+    const correct = (i === q.ans);
+    if (correct) state.score++;
+    else state.wrong++;
+    state.history[state.qIndex] = { q: q.q, selected: i, correct, correctIdx: q.ans };
+    revealAnswer(i);
+    document.getElementById('score-label').textContent = 'স্কোর: ' + state.score;
+    document.getElementById('next-btn').disabled = false;
+    updateDots();
+}
+
+function revealAnswer(selectedIdx) {
+    const q = currentQ();
+    const opts = document.querySelectorAll('#options .opt');
+    opts.forEach((el, i) => {
+        el.classList.add('disabled');
+        if (i === q.ans) el.classList.add('correct');
+        if (selectedIdx === i && i !== q.ans) el.classList.add('wrong');
+        if (selectedIdx === i) el.classList.add('selected');
+    });
+    const exp = document.getElementById('explain');
+    const msg = selectedIdx === q.ans ? '✅ সঠিক!' : (selectedIdx === -1 ? '⏰ সময় শেষ!' : '❌ ভুল উত্তর।');
+    exp.innerHTML = `<b>${msg}</b> ${q.exp}`;
+    exp.classList.add('show');
+}
+
+document.getElementById('next-btn').addEventListener('click', () => {
+    const total = currentSet().questions.length;
+    if (state.qIndex < total - 1) {
+        state.qIndex++;
+        loadQuestion();
+    } else {
+        finishQuiz();
+    }
+});
+
+document.getElementById('quit-btn').addEventListener('click', () => {
+    clearInterval(state.timerInterval);
+    screenQuiz.style.display = 'none';
+    screenStart.style.display = 'block';
+});
+
+function finishQuiz() {
+    clearInterval(state.timerInterval);
+    state.totalElapsed = Math.round((Date.now() - state.quizStart) / 1000);
+    showResult();
+}
+
+function showResult() {
+    screenQuiz.style.display = 'none';
+    screenResult.style.display = 'block';
+    const total = currentSet().questions.length;
+    const pct = Math.round((state.score / total) * 100);
+    document.getElementById('result-greet').textContent = 'শুভেচ্ছা, ' + state.username;
+    document.getElementById('stat-correct').textContent = state.score;
+    document.getElementById('stat-wrong').textContent = state.wrong;
+    const totalSecs = state.totalElapsed;
+    const mm = Math.floor(totalSecs / 60);
+    const ss = totalSecs % 60;
+    document.getElementById('stat-time').textContent = mm > 0 ? mm + 'm ' + ss + 's' : ss + 's';
+    let title = 'অসাধারণ ফলাফল!';
+    if (pct >= 90) title = 'অসাধারণ! তুমি একজন বিশেষজ্ঞ 🏆';
+    else if (pct >= 70) title = 'দারুণ হয়েছে! 👏';
+    else if (pct >= 50) title = 'ভালো চেষ্টা! আরেকটু অনুশীলন করো';
+    else title = 'আবার চেষ্টা করো, তুমি পারবে!';
+    document.getElementById('result-title').textContent = title;
+    const circumference = 2 * Math.PI * 72;
+    const ring = document.getElementById('ring-fg');
+    ring.style.strokeDasharray = circumference;
+    ring.style.strokeDashoffset = circumference;
+    document.getElementById('ring-pct').textContent = '০%';
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            const offset = circumference - (pct / 100) * circumference;
+            ring.style.strokeDashoffset = offset;
+        }, 80);
+    });
+    let curr = 0;
+    const stepTime = Math.max(10, 900 / Math.max(pct, 1));
+    const counter = setInterval(() => {
+        curr++;
+        document.getElementById('ring-pct').textContent = curr + '%';
+        if (curr >= pct) clearInterval(counter);
+    }, stepTime);
+    const reviewWrap = document.getElementById('review-list');
+    reviewWrap.innerHTML = '';
+    state.history.forEach((h, i) => {
+        if (!h) return;
+        const q = currentSet().questions[i];
+        const item = document.createElement('div');
+        item.className = 'rev-item';
+        const letters = ['A', 'B', 'C', 'D'];
+        const yourAns = h.selected === -1 ? 'উত্তর দাওনি (সময় শেষ)' : letters[h.selected] + '. ' + q.opts[h.selected];
+        item.innerHTML = `
+            <div class="rq">${i+1}. ${q.q}</div>
+            <div class="ra ${h.correct ? 'ok' : 'bad'}">তোমার উত্তর: ${yourAns}</div>
+            ${!h.correct ? `<div class="ra correctline">সঠিক: ${letters[h.correctIdx]}. ${q.opts[h.correctIdx]}</div>` : ''}
+        `;
+        reviewWrap.appendChild(item);
+    });
+}
+
+document.getElementById('review-toggle').addEventListener('click', function() {
+    const list = document.getElementById('review-list');
+    list.classList.toggle('show');
+    this.textContent = list.classList.contains('show') ? 'উত্তর লুকাও ↑' : 'উত্তর বিস্তারিত দেখো ↓';
+});
+
+document.getElementById('retry-btn').addEventListener('click', () => {
+    state.qIndex = 0;
+    state.score = 0;
+    state.wrong = 0;
+    state.history = [];
+    screenResult.style.display = 'none';
+    screenQuiz.style.display = 'block';
+    beginQuiz();
+});
+
+document.getElementById('newset-btn').addEventListener('click', () => {
+    screenResult.style.display = 'none';
+    screenStart.style.display = 'block';
+});
+</script>
+</body>
+</html>
